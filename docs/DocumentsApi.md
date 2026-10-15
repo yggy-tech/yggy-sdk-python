@@ -841,7 +841,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **upload_document**
-> UploadDocument202Response upload_document(project_id, x_yggy_organization_id=x_yggy_organization_id, file=file, text=text, note_kind=note_kind, parent_note_id=parent_note_id, title=title, source=source, origin_system=origin_system, project_id2=project_id2, desired_tier=desired_tier, inference_mode=inference_mode)
+> UploadDocument202Response upload_document(project_id, x_yggy_organization_id=x_yggy_organization_id, file=file, text=text, note_kind=note_kind, parent_note_id=parent_note_id, for_link_id=for_link_id, title=title, source=source, origin_system=origin_system, project_id2=project_id2, desired_tier=desired_tier, inference_mode=inference_mode)
 
 Upload and queue a document for async processing (project-scoped)
 
@@ -890,6 +890,7 @@ with yggy.ApiClient(configuration) as api_client:
     text = 'text_example' # str | Plain text or markdown body. Used when no file is uploaded. (optional)
     note_kind = 'note_kind_example' # str | Note kind. When set, the upload is stored on the caller's personal organization. (optional)
     parent_note_id = 'parent_note_id_example' # str | yggy notes: attach the file to this note. The file becomes a document of its own that belongs to the note, and needs a file. (optional)
+    for_link_id = 'for_link_id_example' # str | yggy Notes: the link attachment of the same note this file was uploaded for (its audio, for a transcript). Needs parentNoteId. (optional)
     title = 'title_example' # str | Document title (optional)
     source = 'source_example' # str | Source identifier (optional)
     origin_system = 'origin_system_example' # str | Business system the data originates from (optional)
@@ -899,7 +900,7 @@ with yggy.ApiClient(configuration) as api_client:
 
     try:
         # Upload and queue a document for async processing (project-scoped)
-        api_response = api_instance.upload_document(project_id, x_yggy_organization_id=x_yggy_organization_id, file=file, text=text, note_kind=note_kind, parent_note_id=parent_note_id, title=title, source=source, origin_system=origin_system, project_id2=project_id2, desired_tier=desired_tier, inference_mode=inference_mode)
+        api_response = api_instance.upload_document(project_id, x_yggy_organization_id=x_yggy_organization_id, file=file, text=text, note_kind=note_kind, parent_note_id=parent_note_id, for_link_id=for_link_id, title=title, source=source, origin_system=origin_system, project_id2=project_id2, desired_tier=desired_tier, inference_mode=inference_mode)
         print("The response of DocumentsApi->upload_document:\n")
         pprint(api_response)
     except Exception as e:
@@ -919,6 +920,7 @@ Name | Type | Description  | Notes
  **text** | **str**| Plain text or markdown body. Used when no file is uploaded. | [optional] 
  **note_kind** | **str**| Note kind. When set, the upload is stored on the caller&#39;s personal organization. | [optional] 
  **parent_note_id** | **str**| yggy notes: attach the file to this note. The file becomes a document of its own that belongs to the note, and needs a file. | [optional] 
+ **for_link_id** | **str**| yggy Notes: the link attachment of the same note this file was uploaded for (its audio, for a transcript). Needs parentNoteId. | [optional] 
  **title** | **str**| Document title | [optional] 
  **source** | **str**| Source identifier | [optional] 
  **origin_system** | **str**| Business system the data originates from | [optional] 

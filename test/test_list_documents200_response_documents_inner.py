@@ -55,6 +55,7 @@ class TestListDocuments200ResponseDocumentsInner(unittest.TestCase):
                 failure_message = '',
                 storage_url = '',
                 deleted_at = '',
+                note_kind = '',
                 extraction_method = 'UNSTRUCTURED',
                 structured_regions = '',
                 provenance_chain = '',
