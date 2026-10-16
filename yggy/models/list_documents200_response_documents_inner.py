@@ -47,6 +47,7 @@ class ListDocuments200ResponseDocumentsInner(BaseModel):
     failure_message: Optional[StrictStr] = Field(default=None, alias="failureMessage")
     storage_url: Optional[StrictStr] = Field(default=None, alias="storageUrl")
     deleted_at: Optional[StrictStr] = Field(default=None, alias="deletedAt")
+    note_kind: Optional[StrictStr] = Field(default=None, alias="noteKind")
     extraction_method: Optional[StrictStr] = Field(default=None, alias="extractionMethod")
     structured_regions: Optional[StrictStr] = Field(default=None, alias="structuredRegions")
     provenance_chain: Optional[StrictStr] = Field(default=None, alias="provenanceChain")
@@ -62,7 +63,7 @@ class ListDocuments200ResponseDocumentsInner(BaseModel):
     source_author: Optional[StrictStr] = Field(default=None, alias="sourceAuthor")
     source_metadata: Optional[StrictStr] = Field(default=None, alias="sourceMetadata")
     project_external_id: Optional[StrictStr] = Field(default=None, alias="projectExternalId")
-    __properties: ClassVar[List[str]] = ["documentId", "invocationId", "title", "content", "source", "sourceKind", "originSystem", "ownerExternalId", "ownerDisplayName", "contentType", "status", "createdAt", "updatedAt", "tripleCount", "error", "code", "failureMessage", "storageUrl", "deletedAt", "extractionMethod", "structuredRegions", "provenanceChain", "extractionStats", "processingSummary", "modelUsed", "ocrStrategy", "inferenceMode", "extractionGuidanceRevision", "guidanceRecommendations", "sourceCreatedAt", "sourceModifiedAt", "sourceAuthor", "sourceMetadata", "projectExternalId"]
+    __properties: ClassVar[List[str]] = ["documentId", "invocationId", "title", "content", "source", "sourceKind", "originSystem", "ownerExternalId", "ownerDisplayName", "contentType", "status", "createdAt", "updatedAt", "tripleCount", "error", "code", "failureMessage", "storageUrl", "deletedAt", "noteKind", "extractionMethod", "structuredRegions", "provenanceChain", "extractionStats", "processingSummary", "modelUsed", "ocrStrategy", "inferenceMode", "extractionGuidanceRevision", "guidanceRecommendations", "sourceCreatedAt", "sourceModifiedAt", "sourceAuthor", "sourceMetadata", "projectExternalId"]
 
     @field_validator('source_kind')
     def source_kind_validate_enum(cls, value):
@@ -70,8 +71,8 @@ class ListDocuments200ResponseDocumentsInner(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['UPLOAD', 'GOOGLE_DRIVE', 'MICROSOFT_DRIVE', 'GMAIL', 'OUTLOOK', 'SLACK', 'NOTION', 'LINEAR', 'CHAT', 'SEED']):
-            raise ValueError("must be one of enum values ('UPLOAD', 'GOOGLE_DRIVE', 'MICROSOFT_DRIVE', 'GMAIL', 'OUTLOOK', 'SLACK', 'NOTION', 'LINEAR', 'CHAT', 'SEED')")
+        if value not in set(['UPLOAD', 'GOOGLE_DRIVE', 'MICROSOFT_DRIVE', 'GMAIL', 'OUTLOOK', 'SLACK', 'NOTION', 'LINEAR', 'CHAT', 'SEED', 'LINK', 'SHARED']):
+            raise ValueError("must be one of enum values ('UPLOAD', 'GOOGLE_DRIVE', 'MICROSOFT_DRIVE', 'GMAIL', 'OUTLOOK', 'SLACK', 'NOTION', 'LINEAR', 'CHAT', 'SEED', 'LINK', 'SHARED')")
         return value
 
     @field_validator('status')
@@ -149,6 +150,11 @@ class ListDocuments200ResponseDocumentsInner(BaseModel):
         # and model_fields_set contains the field
         if self.owner_display_name is None and "owner_display_name" in self.model_fields_set:
             _dict['ownerDisplayName'] = None
+
+        # set to None if note_kind (nullable) is None
+        # and model_fields_set contains the field
+        if self.note_kind is None and "note_kind" in self.model_fields_set:
+            _dict['noteKind'] = None
 
         # set to None if structured_regions (nullable) is None
         # and model_fields_set contains the field
@@ -251,6 +257,7 @@ class ListDocuments200ResponseDocumentsInner(BaseModel):
             "failureMessage": obj.get("failureMessage"),
             "storageUrl": obj.get("storageUrl"),
             "deletedAt": obj.get("deletedAt"),
+            "noteKind": obj.get("noteKind"),
             "extractionMethod": obj.get("extractionMethod"),
             "structuredRegions": obj.get("structuredRegions"),
             "provenanceChain": obj.get("provenanceChain"),

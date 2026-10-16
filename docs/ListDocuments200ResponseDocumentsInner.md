@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **failure_message** | **str** |  | [optional] 
 **storage_url** | **str** |  | [optional] 
 **deleted_at** | **str** |  | [optional] 
+**note_kind** | **str** |  | [optional] 
 **extraction_method** | **str** |  | [optional] 
 **structured_regions** | **str** |  | [optional] 
 **provenance_chain** | **str** |  | [optional] 

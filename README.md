@@ -11,10 +11,10 @@
 
 ## Install
 
-The PyPI package `yggy` is not published yet. Until it is, install from GitHub:
+The PyPI package `yggy` is not published yet. Until it is, install a tagged release from GitHub:
 
 ```bash
-pip install git+https://github.com/yggy-tech/yggy-sdk-python
+pip install git+https://github.com/yggy-tech/yggy-sdk-python@v0.1.0
 ```
 
 ## Example

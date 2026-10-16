@@ -2851,6 +2851,7 @@ class DocumentsApi:
         text: Annotated[Optional[StrictStr], Field(description="Plain text or markdown body. Used when no file is uploaded.")] = None,
         note_kind: Annotated[Optional[StrictStr], Field(description="Note kind. When set, the upload is stored on the caller's personal organization.")] = None,
         parent_note_id: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="yggy notes: attach the file to this note. The file becomes a document of its own that belongs to the note, and needs a file.")] = None,
+        for_link_id: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="yggy Notes: the link attachment of the same note this file was uploaded for (its audio, for a transcript). Needs parentNoteId.")] = None,
         title: Annotated[Optional[StrictStr], Field(description="Document title")] = None,
         source: Annotated[Optional[StrictStr], Field(description="Source identifier")] = None,
         origin_system: Annotated[Optional[Annotated[str, Field(strict=True, max_length=80)]], Field(description="Business system the data originates from")] = None,
@@ -2886,6 +2887,8 @@ class DocumentsApi:
         :type note_kind: str
         :param parent_note_id: yggy notes: attach the file to this note. The file becomes a document of its own that belongs to the note, and needs a file.
         :type parent_note_id: str
+        :param for_link_id: yggy Notes: the link attachment of the same note this file was uploaded for (its audio, for a transcript). Needs parentNoteId.
+        :type for_link_id: str
         :param title: Document title
         :type title: str
         :param source: Source identifier
@@ -2927,6 +2930,7 @@ class DocumentsApi:
             text=text,
             note_kind=note_kind,
             parent_note_id=parent_note_id,
+            for_link_id=for_link_id,
             title=title,
             source=source,
             origin_system=origin_system,
@@ -2964,6 +2968,7 @@ class DocumentsApi:
         text: Annotated[Optional[StrictStr], Field(description="Plain text or markdown body. Used when no file is uploaded.")] = None,
         note_kind: Annotated[Optional[StrictStr], Field(description="Note kind. When set, the upload is stored on the caller's personal organization.")] = None,
         parent_note_id: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="yggy notes: attach the file to this note. The file becomes a document of its own that belongs to the note, and needs a file.")] = None,
+        for_link_id: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="yggy Notes: the link attachment of the same note this file was uploaded for (its audio, for a transcript). Needs parentNoteId.")] = None,
         title: Annotated[Optional[StrictStr], Field(description="Document title")] = None,
         source: Annotated[Optional[StrictStr], Field(description="Source identifier")] = None,
         origin_system: Annotated[Optional[Annotated[str, Field(strict=True, max_length=80)]], Field(description="Business system the data originates from")] = None,
@@ -2999,6 +3004,8 @@ class DocumentsApi:
         :type note_kind: str
         :param parent_note_id: yggy notes: attach the file to this note. The file becomes a document of its own that belongs to the note, and needs a file.
         :type parent_note_id: str
+        :param for_link_id: yggy Notes: the link attachment of the same note this file was uploaded for (its audio, for a transcript). Needs parentNoteId.
+        :type for_link_id: str
         :param title: Document title
         :type title: str
         :param source: Source identifier
@@ -3040,6 +3047,7 @@ class DocumentsApi:
             text=text,
             note_kind=note_kind,
             parent_note_id=parent_note_id,
+            for_link_id=for_link_id,
             title=title,
             source=source,
             origin_system=origin_system,
@@ -3077,6 +3085,7 @@ class DocumentsApi:
         text: Annotated[Optional[StrictStr], Field(description="Plain text or markdown body. Used when no file is uploaded.")] = None,
         note_kind: Annotated[Optional[StrictStr], Field(description="Note kind. When set, the upload is stored on the caller's personal organization.")] = None,
         parent_note_id: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="yggy notes: attach the file to this note. The file becomes a document of its own that belongs to the note, and needs a file.")] = None,
+        for_link_id: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="yggy Notes: the link attachment of the same note this file was uploaded for (its audio, for a transcript). Needs parentNoteId.")] = None,
         title: Annotated[Optional[StrictStr], Field(description="Document title")] = None,
         source: Annotated[Optional[StrictStr], Field(description="Source identifier")] = None,
         origin_system: Annotated[Optional[Annotated[str, Field(strict=True, max_length=80)]], Field(description="Business system the data originates from")] = None,
@@ -3112,6 +3121,8 @@ class DocumentsApi:
         :type note_kind: str
         :param parent_note_id: yggy notes: attach the file to this note. The file becomes a document of its own that belongs to the note, and needs a file.
         :type parent_note_id: str
+        :param for_link_id: yggy Notes: the link attachment of the same note this file was uploaded for (its audio, for a transcript). Needs parentNoteId.
+        :type for_link_id: str
         :param title: Document title
         :type title: str
         :param source: Source identifier
@@ -3153,6 +3164,7 @@ class DocumentsApi:
             text=text,
             note_kind=note_kind,
             parent_note_id=parent_note_id,
+            for_link_id=for_link_id,
             title=title,
             source=source,
             origin_system=origin_system,
@@ -3185,6 +3197,7 @@ class DocumentsApi:
         text,
         note_kind,
         parent_note_id,
+        for_link_id,
         title,
         source,
         origin_system,
@@ -3227,6 +3240,8 @@ class DocumentsApi:
             _form_params.append(('noteKind', note_kind))
         if parent_note_id is not None:
             _form_params.append(('parentNoteId', parent_note_id))
+        if for_link_id is not None:
+            _form_params.append(('forLinkId', for_link_id))
         if title is not None:
             _form_params.append(('title', title))
         if source is not None:
