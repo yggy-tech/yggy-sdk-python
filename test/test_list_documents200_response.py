@@ -72,6 +72,15 @@ class TestListDocuments200Response(unittest.TestCase):
                         source_modified_at = '', 
                         source_author = '', 
                         source_metadata = '', 
+                        attached_to = yggy.models.list_documents_200_response_documents_inner_attached_to.listDocuments_200_response_documents_inner_attachedTo(
+                            document_id = '', 
+                            title = '', ), 
+                        mail_attachments = [
+                            yggy.models.list_documents_200_response_documents_inner_mail_attachments_inner.listDocuments_200_response_documents_inner_mailAttachments_inner(
+                                document_id = '', 
+                                title = '', 
+                                status = 'PENDING', )
+                            ], 
                         project_external_id = '', )
                     ],
                 total = 1.337,
@@ -116,6 +125,15 @@ class TestListDocuments200Response(unittest.TestCase):
                         source_modified_at = '', 
                         source_author = '', 
                         source_metadata = '', 
+                        attached_to = yggy.models.list_documents_200_response_documents_inner_attached_to.listDocuments_200_response_documents_inner_attachedTo(
+                            document_id = '', 
+                            title = '', ), 
+                        mail_attachments = [
+                            yggy.models.list_documents_200_response_documents_inner_mail_attachments_inner.listDocuments_200_response_documents_inner_mailAttachments_inner(
+                                document_id = '', 
+                                title = '', 
+                                status = 'PENDING', )
+                            ], 
                         project_external_id = '', )
                     ],
                 total = 1.337,

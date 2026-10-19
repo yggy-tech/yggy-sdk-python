@@ -69,6 +69,8 @@ __all__ = [
     "ListDocumentTriples200ResponseTriplesInnerSubjectIdentity",
     "ListDocuments200Response",
     "ListDocuments200ResponseDocumentsInner",
+    "ListDocuments200ResponseDocumentsInnerAttachedTo",
+    "ListDocuments200ResponseDocumentsInnerMailAttachmentsInner",
     "ListGraphExports200Response",
     "ListGraphExports200ResponseExportsInner",
     "ListProjects200Response",
@@ -143,6 +145,8 @@ from yggy.models.list_document_triples200_response_triples_inner_qualifiers impo
 from yggy.models.list_document_triples200_response_triples_inner_subject_identity import ListDocumentTriples200ResponseTriplesInnerSubjectIdentity as ListDocumentTriples200ResponseTriplesInnerSubjectIdentity
 from yggy.models.list_documents200_response import ListDocuments200Response as ListDocuments200Response
 from yggy.models.list_documents200_response_documents_inner import ListDocuments200ResponseDocumentsInner as ListDocuments200ResponseDocumentsInner
+from yggy.models.list_documents200_response_documents_inner_attached_to import ListDocuments200ResponseDocumentsInnerAttachedTo as ListDocuments200ResponseDocumentsInnerAttachedTo
+from yggy.models.list_documents200_response_documents_inner_mail_attachments_inner import ListDocuments200ResponseDocumentsInnerMailAttachmentsInner as ListDocuments200ResponseDocumentsInnerMailAttachmentsInner
 from yggy.models.list_graph_exports200_response import ListGraphExports200Response as ListGraphExports200Response
 from yggy.models.list_graph_exports200_response_exports_inner import ListGraphExports200ResponseExportsInner as ListGraphExports200ResponseExportsInner
 from yggy.models.list_projects200_response import ListProjects200Response as ListProjects200Response

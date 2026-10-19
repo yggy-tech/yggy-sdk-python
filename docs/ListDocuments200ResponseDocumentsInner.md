@@ -39,6 +39,8 @@ Name | Type | Description | Notes
 **source_modified_at** | **str** |  | [optional] 
 **source_author** | **str** |  | [optional] 
 **source_metadata** | **str** |  | [optional] 
+**attached_to** | [**ListDocuments200ResponseDocumentsInnerAttachedTo**](ListDocuments200ResponseDocumentsInnerAttachedTo.md) |  | [optional] 
+**mail_attachments** | [**List[ListDocuments200ResponseDocumentsInnerMailAttachmentsInner]**](ListDocuments200ResponseDocumentsInnerMailAttachmentsInner.md) |  | [optional] 
 **project_external_id** | **str** |  | [optional] 
 
 ## Example
