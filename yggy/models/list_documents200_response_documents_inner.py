@@ -21,6 +21,8 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
+from yggy.models.list_documents200_response_documents_inner_attached_to import ListDocuments200ResponseDocumentsInnerAttachedTo
+from yggy.models.list_documents200_response_documents_inner_mail_attachments_inner import ListDocuments200ResponseDocumentsInnerMailAttachmentsInner
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -62,8 +64,10 @@ class ListDocuments200ResponseDocumentsInner(BaseModel):
     source_modified_at: Optional[StrictStr] = Field(default=None, alias="sourceModifiedAt")
     source_author: Optional[StrictStr] = Field(default=None, alias="sourceAuthor")
     source_metadata: Optional[StrictStr] = Field(default=None, alias="sourceMetadata")
+    attached_to: Optional[ListDocuments200ResponseDocumentsInnerAttachedTo] = Field(default=None, alias="attachedTo")
+    mail_attachments: Optional[List[ListDocuments200ResponseDocumentsInnerMailAttachmentsInner]] = Field(default=None, alias="mailAttachments")
     project_external_id: Optional[StrictStr] = Field(default=None, alias="projectExternalId")
-    __properties: ClassVar[List[str]] = ["documentId", "invocationId", "title", "content", "source", "sourceKind", "originSystem", "ownerExternalId", "ownerDisplayName", "contentType", "status", "createdAt", "updatedAt", "tripleCount", "error", "code", "failureMessage", "storageUrl", "deletedAt", "noteKind", "extractionMethod", "structuredRegions", "provenanceChain", "extractionStats", "processingSummary", "modelUsed", "ocrStrategy", "inferenceMode", "extractionGuidanceRevision", "guidanceRecommendations", "sourceCreatedAt", "sourceModifiedAt", "sourceAuthor", "sourceMetadata", "projectExternalId"]
+    __properties: ClassVar[List[str]] = ["documentId", "invocationId", "title", "content", "source", "sourceKind", "originSystem", "ownerExternalId", "ownerDisplayName", "contentType", "status", "createdAt", "updatedAt", "tripleCount", "error", "code", "failureMessage", "storageUrl", "deletedAt", "noteKind", "extractionMethod", "structuredRegions", "provenanceChain", "extractionStats", "processingSummary", "modelUsed", "ocrStrategy", "inferenceMode", "extractionGuidanceRevision", "guidanceRecommendations", "sourceCreatedAt", "sourceModifiedAt", "sourceAuthor", "sourceMetadata", "attachedTo", "mailAttachments", "projectExternalId"]
 
     @field_validator('source_kind')
     def source_kind_validate_enum(cls, value):
@@ -131,6 +135,16 @@ class ListDocuments200ResponseDocumentsInner(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of attached_to
+        if self.attached_to:
+            _dict['attachedTo'] = self.attached_to.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in mail_attachments (list)
+        _items = []
+        if self.mail_attachments:
+            for _item_mail_attachments in self.mail_attachments:
+                if _item_mail_attachments:
+                    _items.append(_item_mail_attachments.to_dict())
+            _dict['mailAttachments'] = _items
         # set to None if source_kind (nullable) is None
         # and model_fields_set contains the field
         if self.source_kind is None and "source_kind" in self.model_fields_set:
@@ -272,6 +286,8 @@ class ListDocuments200ResponseDocumentsInner(BaseModel):
             "sourceModifiedAt": obj.get("sourceModifiedAt"),
             "sourceAuthor": obj.get("sourceAuthor"),
             "sourceMetadata": obj.get("sourceMetadata"),
+            "attachedTo": ListDocuments200ResponseDocumentsInnerAttachedTo.from_dict(obj["attachedTo"]) if obj.get("attachedTo") is not None else None,
+            "mailAttachments": [ListDocuments200ResponseDocumentsInnerMailAttachmentsInner.from_dict(_item) for _item in obj["mailAttachments"]] if obj.get("mailAttachments") is not None else None,
             "projectExternalId": obj.get("projectExternalId")
         })
         return _obj
