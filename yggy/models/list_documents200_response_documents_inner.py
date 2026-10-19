@@ -75,8 +75,8 @@ class ListDocuments200ResponseDocumentsInner(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['UPLOAD', 'GOOGLE_DRIVE', 'MICROSOFT_DRIVE', 'GMAIL', 'OUTLOOK', 'SLACK', 'NOTION', 'LINEAR', 'CHAT', 'SEED', 'LINK', 'SHARED']):
-            raise ValueError("must be one of enum values ('UPLOAD', 'GOOGLE_DRIVE', 'MICROSOFT_DRIVE', 'GMAIL', 'OUTLOOK', 'SLACK', 'NOTION', 'LINEAR', 'CHAT', 'SEED', 'LINK', 'SHARED')")
+        if value not in set(['UPLOAD', 'GOOGLE_DRIVE', 'MICROSOFT_DRIVE', 'GMAIL', 'OUTLOOK', 'SLACK', 'NOTION', 'LINEAR', 'CHAT', 'SEED', 'LINK', 'SHARED', 'FORWARDED']):
+            raise ValueError("must be one of enum values ('UPLOAD', 'GOOGLE_DRIVE', 'MICROSOFT_DRIVE', 'GMAIL', 'OUTLOOK', 'SLACK', 'NOTION', 'LINEAR', 'CHAT', 'SEED', 'LINK', 'SHARED', 'FORWARDED')")
         return value
 
     @field_validator('status')
