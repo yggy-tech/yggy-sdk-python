@@ -841,7 +841,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **upload_document**
-> UploadDocument202Response upload_document(project_id, x_yggy_organization_id=x_yggy_organization_id, file=file, text=text, note_kind=note_kind, parent_note_id=parent_note_id, for_link_id=for_link_id, title=title, source=source, origin_system=origin_system, project_id2=project_id2, desired_tier=desired_tier, inference_mode=inference_mode)
+> UploadDocument202Response upload_document(project_id, x_yggy_organization_id=x_yggy_organization_id, file=file, text=text, note_kind=note_kind, parent_note_id=parent_note_id, for_link_id=for_link_id, title=title, source=source, origin_system=origin_system, external_id=external_id, metadata=metadata, project_id2=project_id2, desired_tier=desired_tier, inference_mode=inference_mode)
 
 Upload and queue a document for async processing (project-scoped)
 
@@ -894,13 +894,15 @@ with yggy.ApiClient(configuration) as api_client:
     title = 'title_example' # str | Document title (optional)
     source = 'source_example' # str | Source identifier (optional)
     origin_system = 'origin_system_example' # str | Business system the data originates from (optional)
+    external_id = 'external_id_example' # str | Your own id for the document. Returned as externalId in query results and chat citations. (optional)
+    metadata = 'metadata_example' # str | JSON object of your own key-value pairs for the document, for example {\\\"region\\\":\\\"EU\\\",\\\"priority\\\":2}. Values are strings, numbers or booleans; at most 50 keys and 8192 bytes. Returned as metadata in query results and chat citations. (optional)
     project_id2 = 'project_id_example' # str | Project ID to bind the document to at upload time (optional)
     desired_tier = 'desired_tier_example' # str | Model tier for extraction. Defaults to auto. (optional)
     inference_mode = 'inference_mode_example' # str | Inference routing for extraction. Defaults to org settings. (optional)
 
     try:
         # Upload and queue a document for async processing (project-scoped)
-        api_response = api_instance.upload_document(project_id, x_yggy_organization_id=x_yggy_organization_id, file=file, text=text, note_kind=note_kind, parent_note_id=parent_note_id, for_link_id=for_link_id, title=title, source=source, origin_system=origin_system, project_id2=project_id2, desired_tier=desired_tier, inference_mode=inference_mode)
+        api_response = api_instance.upload_document(project_id, x_yggy_organization_id=x_yggy_organization_id, file=file, text=text, note_kind=note_kind, parent_note_id=parent_note_id, for_link_id=for_link_id, title=title, source=source, origin_system=origin_system, external_id=external_id, metadata=metadata, project_id2=project_id2, desired_tier=desired_tier, inference_mode=inference_mode)
         print("The response of DocumentsApi->upload_document:\n")
         pprint(api_response)
     except Exception as e:
@@ -924,6 +926,8 @@ Name | Type | Description  | Notes
  **title** | **str**| Document title | [optional] 
  **source** | **str**| Source identifier | [optional] 
  **origin_system** | **str**| Business system the data originates from | [optional] 
+ **external_id** | **str**| Your own id for the document. Returned as externalId in query results and chat citations. | [optional] 
+ **metadata** | **str**| JSON object of your own key-value pairs for the document, for example {\\\&quot;region\\\&quot;:\\\&quot;EU\\\&quot;,\\\&quot;priority\\\&quot;:2}. Values are strings, numbers or booleans; at most 50 keys and 8192 bytes. Returned as metadata in query results and chat citations. | [optional] 
  **project_id2** | **str**| Project ID to bind the document to at upload time | [optional] 
  **desired_tier** | **str**| Model tier for extraction. Defaults to auto. | [optional] 
  **inference_mode** | **str**| Inference routing for extraction. Defaults to org settings. | [optional] 

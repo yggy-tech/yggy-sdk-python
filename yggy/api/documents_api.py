@@ -2855,6 +2855,8 @@ class DocumentsApi:
         title: Annotated[Optional[StrictStr], Field(description="Document title")] = None,
         source: Annotated[Optional[StrictStr], Field(description="Source identifier")] = None,
         origin_system: Annotated[Optional[Annotated[str, Field(strict=True, max_length=80)]], Field(description="Business system the data originates from")] = None,
+        external_id: Annotated[Optional[Annotated[str, Field(min_length=1, strict=True, max_length=500)]], Field(description="Your own id for the document. Returned as externalId in query results and chat citations.")] = None,
+        metadata: Annotated[Optional[Annotated[str, Field(strict=True, max_length=16384)]], Field(description="JSON object of your own key-value pairs for the document, for example {\\\"region\\\":\\\"EU\\\",\\\"priority\\\":2}. Values are strings, numbers or booleans; at most 50 keys and 8192 bytes. Returned as metadata in query results and chat citations.")] = None,
         project_id2: Annotated[Optional[StrictStr], Field(description="Project ID to bind the document to at upload time")] = None,
         desired_tier: Annotated[Optional[StrictStr], Field(description="Model tier for extraction. Defaults to auto.")] = None,
         inference_mode: Annotated[Optional[StrictStr], Field(description="Inference routing for extraction. Defaults to org settings.")] = None,
@@ -2895,6 +2897,10 @@ class DocumentsApi:
         :type source: str
         :param origin_system: Business system the data originates from
         :type origin_system: str
+        :param external_id: Your own id for the document. Returned as externalId in query results and chat citations.
+        :type external_id: str
+        :param metadata: JSON object of your own key-value pairs for the document, for example {\\\"region\\\":\\\"EU\\\",\\\"priority\\\":2}. Values are strings, numbers or booleans; at most 50 keys and 8192 bytes. Returned as metadata in query results and chat citations.
+        :type metadata: str
         :param project_id2: Project ID to bind the document to at upload time
         :type project_id2: str
         :param desired_tier: Model tier for extraction. Defaults to auto.
@@ -2934,6 +2940,8 @@ class DocumentsApi:
             title=title,
             source=source,
             origin_system=origin_system,
+            external_id=external_id,
+            metadata=metadata,
             project_id2=project_id2,
             desired_tier=desired_tier,
             inference_mode=inference_mode,
@@ -2972,6 +2980,8 @@ class DocumentsApi:
         title: Annotated[Optional[StrictStr], Field(description="Document title")] = None,
         source: Annotated[Optional[StrictStr], Field(description="Source identifier")] = None,
         origin_system: Annotated[Optional[Annotated[str, Field(strict=True, max_length=80)]], Field(description="Business system the data originates from")] = None,
+        external_id: Annotated[Optional[Annotated[str, Field(min_length=1, strict=True, max_length=500)]], Field(description="Your own id for the document. Returned as externalId in query results and chat citations.")] = None,
+        metadata: Annotated[Optional[Annotated[str, Field(strict=True, max_length=16384)]], Field(description="JSON object of your own key-value pairs for the document, for example {\\\"region\\\":\\\"EU\\\",\\\"priority\\\":2}. Values are strings, numbers or booleans; at most 50 keys and 8192 bytes. Returned as metadata in query results and chat citations.")] = None,
         project_id2: Annotated[Optional[StrictStr], Field(description="Project ID to bind the document to at upload time")] = None,
         desired_tier: Annotated[Optional[StrictStr], Field(description="Model tier for extraction. Defaults to auto.")] = None,
         inference_mode: Annotated[Optional[StrictStr], Field(description="Inference routing for extraction. Defaults to org settings.")] = None,
@@ -3012,6 +3022,10 @@ class DocumentsApi:
         :type source: str
         :param origin_system: Business system the data originates from
         :type origin_system: str
+        :param external_id: Your own id for the document. Returned as externalId in query results and chat citations.
+        :type external_id: str
+        :param metadata: JSON object of your own key-value pairs for the document, for example {\\\"region\\\":\\\"EU\\\",\\\"priority\\\":2}. Values are strings, numbers or booleans; at most 50 keys and 8192 bytes. Returned as metadata in query results and chat citations.
+        :type metadata: str
         :param project_id2: Project ID to bind the document to at upload time
         :type project_id2: str
         :param desired_tier: Model tier for extraction. Defaults to auto.
@@ -3051,6 +3065,8 @@ class DocumentsApi:
             title=title,
             source=source,
             origin_system=origin_system,
+            external_id=external_id,
+            metadata=metadata,
             project_id2=project_id2,
             desired_tier=desired_tier,
             inference_mode=inference_mode,
@@ -3089,6 +3105,8 @@ class DocumentsApi:
         title: Annotated[Optional[StrictStr], Field(description="Document title")] = None,
         source: Annotated[Optional[StrictStr], Field(description="Source identifier")] = None,
         origin_system: Annotated[Optional[Annotated[str, Field(strict=True, max_length=80)]], Field(description="Business system the data originates from")] = None,
+        external_id: Annotated[Optional[Annotated[str, Field(min_length=1, strict=True, max_length=500)]], Field(description="Your own id for the document. Returned as externalId in query results and chat citations.")] = None,
+        metadata: Annotated[Optional[Annotated[str, Field(strict=True, max_length=16384)]], Field(description="JSON object of your own key-value pairs for the document, for example {\\\"region\\\":\\\"EU\\\",\\\"priority\\\":2}. Values are strings, numbers or booleans; at most 50 keys and 8192 bytes. Returned as metadata in query results and chat citations.")] = None,
         project_id2: Annotated[Optional[StrictStr], Field(description="Project ID to bind the document to at upload time")] = None,
         desired_tier: Annotated[Optional[StrictStr], Field(description="Model tier for extraction. Defaults to auto.")] = None,
         inference_mode: Annotated[Optional[StrictStr], Field(description="Inference routing for extraction. Defaults to org settings.")] = None,
@@ -3129,6 +3147,10 @@ class DocumentsApi:
         :type source: str
         :param origin_system: Business system the data originates from
         :type origin_system: str
+        :param external_id: Your own id for the document. Returned as externalId in query results and chat citations.
+        :type external_id: str
+        :param metadata: JSON object of your own key-value pairs for the document, for example {\\\"region\\\":\\\"EU\\\",\\\"priority\\\":2}. Values are strings, numbers or booleans; at most 50 keys and 8192 bytes. Returned as metadata in query results and chat citations.
+        :type metadata: str
         :param project_id2: Project ID to bind the document to at upload time
         :type project_id2: str
         :param desired_tier: Model tier for extraction. Defaults to auto.
@@ -3168,6 +3190,8 @@ class DocumentsApi:
             title=title,
             source=source,
             origin_system=origin_system,
+            external_id=external_id,
+            metadata=metadata,
             project_id2=project_id2,
             desired_tier=desired_tier,
             inference_mode=inference_mode,
@@ -3201,6 +3225,8 @@ class DocumentsApi:
         title,
         source,
         origin_system,
+        external_id,
+        metadata,
         project_id2,
         desired_tier,
         inference_mode,
@@ -3248,6 +3274,10 @@ class DocumentsApi:
             _form_params.append(('source', source))
         if origin_system is not None:
             _form_params.append(('originSystem', origin_system))
+        if external_id is not None:
+            _form_params.append(('externalId', external_id))
+        if metadata is not None:
+            _form_params.append(('metadata', metadata))
         if project_id2 is not None:
             _form_params.append(('projectId', project_id2))
         if desired_tier is not None:
