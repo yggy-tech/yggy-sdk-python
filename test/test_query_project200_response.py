@@ -44,7 +44,13 @@ class TestQueryProject200Response(unittest.TestCase):
                         source = '', 
                         title = '', 
                         snippet = '', 
-                        score = 1.337, )
+                        score = 1.337, 
+                        external_id = '', 
+                        origin_system = '', 
+                        web_url = '', 
+                        metadata = {
+                            'key' : null
+                            }, )
                     ],
                 entities = [
                     yggy.models.query_project_200_response_entities_inner.queryProject_200_response_entities_inner(
@@ -88,7 +94,13 @@ class TestQueryProject200Response(unittest.TestCase):
                         source = '', 
                         title = '', 
                         snippet = '', 
-                        score = 1.337, )
+                        score = 1.337, 
+                        external_id = '', 
+                        origin_system = '', 
+                        web_url = '', 
+                        metadata = {
+                            'key' : null
+                            }, )
                     ],
         )
         """

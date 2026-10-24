@@ -11,6 +11,10 @@ Name | Type | Description | Notes
 **title** | **str** | Document title | 
 **snippet** | **str** | Short passage used for ranking | 
 **score** | **float** | Relative rank from 0 to 1 inside this result set | 
+**external_id** | **str** | Your own id for the document, as sent on upload | [optional] 
+**origin_system** | **str** | Business system the data originates from | [optional] 
+**web_url** | **str** | Link to the document in your system | [optional] 
+**metadata** | [**Dict[str, QueryProject200ResponseContextsInnerMetadataValue]**](QueryProject200ResponseContextsInnerMetadataValue.md) | Your own key-value pairs, as sent on upload. Imported documents carry fields of their source here. | [optional] 
 
 ## Example
 

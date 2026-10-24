@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from yggy.models.query_project200_response_contexts_inner_metadata_value import QueryProject200ResponseContextsInnerMetadataValue
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,7 +34,11 @@ class QueryProject200ResponseContextsInner(BaseModel):
     title: StrictStr = Field(description="Document title")
     snippet: StrictStr = Field(description="Short passage used for ranking")
     score: Union[StrictFloat, StrictInt] = Field(description="Relative rank from 0 to 1 inside this result set")
-    __properties: ClassVar[List[str]] = ["id", "documentId", "source", "title", "snippet", "score"]
+    external_id: Optional[StrictStr] = Field(default=None, description="Your own id for the document, as sent on upload", alias="externalId")
+    origin_system: Optional[StrictStr] = Field(default=None, description="Business system the data originates from", alias="originSystem")
+    web_url: Optional[StrictStr] = Field(default=None, description="Link to the document in your system", alias="webUrl")
+    metadata: Optional[Dict[str, QueryProject200ResponseContextsInnerMetadataValue]] = Field(default=None, description="Your own key-value pairs, as sent on upload. Imported documents carry fields of their source here.")
+    __properties: ClassVar[List[str]] = ["id", "documentId", "source", "title", "snippet", "score", "externalId", "originSystem", "webUrl", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -74,6 +79,13 @@ class QueryProject200ResponseContextsInner(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
+        _field_dict = {}
+        if self.metadata:
+            for _key_metadata in self.metadata:
+                if self.metadata[_key_metadata]:
+                    _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict()
+            _dict['metadata'] = _field_dict
         return _dict
 
     @classmethod
@@ -91,7 +103,16 @@ class QueryProject200ResponseContextsInner(BaseModel):
             "source": obj.get("source"),
             "title": obj.get("title"),
             "snippet": obj.get("snippet"),
-            "score": obj.get("score")
+            "score": obj.get("score"),
+            "externalId": obj.get("externalId"),
+            "originSystem": obj.get("originSystem"),
+            "webUrl": obj.get("webUrl"),
+            "metadata": dict(
+                (_k, QueryProject200ResponseContextsInnerMetadataValue.from_dict(_v))
+                for _k, _v in obj["metadata"].items()
+            )
+            if obj.get("metadata") is not None
+            else None
         })
         return _obj
 
