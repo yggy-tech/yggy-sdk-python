@@ -2848,16 +2848,19 @@ class DocumentsApi:
         project_id: Annotated[str, Field(min_length=1, strict=True)],
         x_yggy_organization_id: Optional[StrictStr] = None,
         file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The document file to upload. Optional when text is set.")] = None,
-        text: Annotated[Optional[StrictStr], Field(description="Plain text or markdown body. Used when no file is uploaded.")] = None,
+        text: Annotated[Optional[StrictStr], Field(description="Plain text or markdown body. Used when no file is uploaded: it is processed like an uploaded markdown file. With noteKind it becomes a yggy note instead.")] = None,
         note_kind: Annotated[Optional[StrictStr], Field(description="Note kind. When set, the upload is stored on the caller's personal organization.")] = None,
         parent_note_id: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="yggy notes: attach the file to this note. The file becomes a document of its own that belongs to the note, and needs a file.")] = None,
         for_link_id: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="yggy Notes: the link attachment of the same note this file was uploaded for (its audio, for a transcript). Needs parentNoteId.")] = None,
         title: Annotated[Optional[StrictStr], Field(description="Document title")] = None,
         source: Annotated[Optional[StrictStr], Field(description="Source identifier")] = None,
         origin_system: Annotated[Optional[Annotated[str, Field(strict=True, max_length=80)]], Field(description="Business system the data originates from")] = None,
+        external_id: Annotated[Optional[Annotated[str, Field(min_length=1, strict=True, max_length=500)]], Field(description="Your own id for the document. Returned as externalId in query results and chat citations.")] = None,
+        metadata: Annotated[Optional[Annotated[str, Field(strict=True, max_length=16384)]], Field(description="JSON object of your own key-value pairs for the document, for example {\\\"region\\\":\\\"EU\\\",\\\"priority\\\":2}. Values are strings, numbers or booleans; at most 50 keys and 8192 bytes. Returned as metadata in query results and chat citations.")] = None,
         project_id2: Annotated[Optional[StrictStr], Field(description="Project ID to bind the document to at upload time")] = None,
         desired_tier: Annotated[Optional[StrictStr], Field(description="Model tier for extraction. Defaults to auto.")] = None,
         inference_mode: Annotated[Optional[StrictStr], Field(description="Inference routing for extraction. Defaults to org settings.")] = None,
+        onboarding: Annotated[Optional[StrictStr], Field(description="First-run onboarding request; the server decides whether the free first batch applies.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2881,7 +2884,7 @@ class DocumentsApi:
         :type x_yggy_organization_id: str
         :param file: The document file to upload. Optional when text is set.
         :type file: bytearray
-        :param text: Plain text or markdown body. Used when no file is uploaded.
+        :param text: Plain text or markdown body. Used when no file is uploaded: it is processed like an uploaded markdown file. With noteKind it becomes a yggy note instead.
         :type text: str
         :param note_kind: Note kind. When set, the upload is stored on the caller's personal organization.
         :type note_kind: str
@@ -2895,12 +2898,18 @@ class DocumentsApi:
         :type source: str
         :param origin_system: Business system the data originates from
         :type origin_system: str
+        :param external_id: Your own id for the document. Returned as externalId in query results and chat citations.
+        :type external_id: str
+        :param metadata: JSON object of your own key-value pairs for the document, for example {\\\"region\\\":\\\"EU\\\",\\\"priority\\\":2}. Values are strings, numbers or booleans; at most 50 keys and 8192 bytes. Returned as metadata in query results and chat citations.
+        :type metadata: str
         :param project_id2: Project ID to bind the document to at upload time
         :type project_id2: str
         :param desired_tier: Model tier for extraction. Defaults to auto.
         :type desired_tier: str
         :param inference_mode: Inference routing for extraction. Defaults to org settings.
         :type inference_mode: str
+        :param onboarding: First-run onboarding request; the server decides whether the free first batch applies.
+        :type onboarding: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2934,9 +2943,12 @@ class DocumentsApi:
             title=title,
             source=source,
             origin_system=origin_system,
+            external_id=external_id,
+            metadata=metadata,
             project_id2=project_id2,
             desired_tier=desired_tier,
             inference_mode=inference_mode,
+            onboarding=onboarding,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2965,16 +2977,19 @@ class DocumentsApi:
         project_id: Annotated[str, Field(min_length=1, strict=True)],
         x_yggy_organization_id: Optional[StrictStr] = None,
         file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The document file to upload. Optional when text is set.")] = None,
-        text: Annotated[Optional[StrictStr], Field(description="Plain text or markdown body. Used when no file is uploaded.")] = None,
+        text: Annotated[Optional[StrictStr], Field(description="Plain text or markdown body. Used when no file is uploaded: it is processed like an uploaded markdown file. With noteKind it becomes a yggy note instead.")] = None,
         note_kind: Annotated[Optional[StrictStr], Field(description="Note kind. When set, the upload is stored on the caller's personal organization.")] = None,
         parent_note_id: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="yggy notes: attach the file to this note. The file becomes a document of its own that belongs to the note, and needs a file.")] = None,
         for_link_id: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="yggy Notes: the link attachment of the same note this file was uploaded for (its audio, for a transcript). Needs parentNoteId.")] = None,
         title: Annotated[Optional[StrictStr], Field(description="Document title")] = None,
         source: Annotated[Optional[StrictStr], Field(description="Source identifier")] = None,
         origin_system: Annotated[Optional[Annotated[str, Field(strict=True, max_length=80)]], Field(description="Business system the data originates from")] = None,
+        external_id: Annotated[Optional[Annotated[str, Field(min_length=1, strict=True, max_length=500)]], Field(description="Your own id for the document. Returned as externalId in query results and chat citations.")] = None,
+        metadata: Annotated[Optional[Annotated[str, Field(strict=True, max_length=16384)]], Field(description="JSON object of your own key-value pairs for the document, for example {\\\"region\\\":\\\"EU\\\",\\\"priority\\\":2}. Values are strings, numbers or booleans; at most 50 keys and 8192 bytes. Returned as metadata in query results and chat citations.")] = None,
         project_id2: Annotated[Optional[StrictStr], Field(description="Project ID to bind the document to at upload time")] = None,
         desired_tier: Annotated[Optional[StrictStr], Field(description="Model tier for extraction. Defaults to auto.")] = None,
         inference_mode: Annotated[Optional[StrictStr], Field(description="Inference routing for extraction. Defaults to org settings.")] = None,
+        onboarding: Annotated[Optional[StrictStr], Field(description="First-run onboarding request; the server decides whether the free first batch applies.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2998,7 +3013,7 @@ class DocumentsApi:
         :type x_yggy_organization_id: str
         :param file: The document file to upload. Optional when text is set.
         :type file: bytearray
-        :param text: Plain text or markdown body. Used when no file is uploaded.
+        :param text: Plain text or markdown body. Used when no file is uploaded: it is processed like an uploaded markdown file. With noteKind it becomes a yggy note instead.
         :type text: str
         :param note_kind: Note kind. When set, the upload is stored on the caller's personal organization.
         :type note_kind: str
@@ -3012,12 +3027,18 @@ class DocumentsApi:
         :type source: str
         :param origin_system: Business system the data originates from
         :type origin_system: str
+        :param external_id: Your own id for the document. Returned as externalId in query results and chat citations.
+        :type external_id: str
+        :param metadata: JSON object of your own key-value pairs for the document, for example {\\\"region\\\":\\\"EU\\\",\\\"priority\\\":2}. Values are strings, numbers or booleans; at most 50 keys and 8192 bytes. Returned as metadata in query results and chat citations.
+        :type metadata: str
         :param project_id2: Project ID to bind the document to at upload time
         :type project_id2: str
         :param desired_tier: Model tier for extraction. Defaults to auto.
         :type desired_tier: str
         :param inference_mode: Inference routing for extraction. Defaults to org settings.
         :type inference_mode: str
+        :param onboarding: First-run onboarding request; the server decides whether the free first batch applies.
+        :type onboarding: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3051,9 +3072,12 @@ class DocumentsApi:
             title=title,
             source=source,
             origin_system=origin_system,
+            external_id=external_id,
+            metadata=metadata,
             project_id2=project_id2,
             desired_tier=desired_tier,
             inference_mode=inference_mode,
+            onboarding=onboarding,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3082,16 +3106,19 @@ class DocumentsApi:
         project_id: Annotated[str, Field(min_length=1, strict=True)],
         x_yggy_organization_id: Optional[StrictStr] = None,
         file: Annotated[Optional[Union[StrictBytes, StrictStr, Tuple[StrictStr, StrictBytes]]], Field(description="The document file to upload. Optional when text is set.")] = None,
-        text: Annotated[Optional[StrictStr], Field(description="Plain text or markdown body. Used when no file is uploaded.")] = None,
+        text: Annotated[Optional[StrictStr], Field(description="Plain text or markdown body. Used when no file is uploaded: it is processed like an uploaded markdown file. With noteKind it becomes a yggy note instead.")] = None,
         note_kind: Annotated[Optional[StrictStr], Field(description="Note kind. When set, the upload is stored on the caller's personal organization.")] = None,
         parent_note_id: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="yggy notes: attach the file to this note. The file becomes a document of its own that belongs to the note, and needs a file.")] = None,
         for_link_id: Annotated[Optional[Annotated[str, Field(strict=True)]], Field(description="yggy Notes: the link attachment of the same note this file was uploaded for (its audio, for a transcript). Needs parentNoteId.")] = None,
         title: Annotated[Optional[StrictStr], Field(description="Document title")] = None,
         source: Annotated[Optional[StrictStr], Field(description="Source identifier")] = None,
         origin_system: Annotated[Optional[Annotated[str, Field(strict=True, max_length=80)]], Field(description="Business system the data originates from")] = None,
+        external_id: Annotated[Optional[Annotated[str, Field(min_length=1, strict=True, max_length=500)]], Field(description="Your own id for the document. Returned as externalId in query results and chat citations.")] = None,
+        metadata: Annotated[Optional[Annotated[str, Field(strict=True, max_length=16384)]], Field(description="JSON object of your own key-value pairs for the document, for example {\\\"region\\\":\\\"EU\\\",\\\"priority\\\":2}. Values are strings, numbers or booleans; at most 50 keys and 8192 bytes. Returned as metadata in query results and chat citations.")] = None,
         project_id2: Annotated[Optional[StrictStr], Field(description="Project ID to bind the document to at upload time")] = None,
         desired_tier: Annotated[Optional[StrictStr], Field(description="Model tier for extraction. Defaults to auto.")] = None,
         inference_mode: Annotated[Optional[StrictStr], Field(description="Inference routing for extraction. Defaults to org settings.")] = None,
+        onboarding: Annotated[Optional[StrictStr], Field(description="First-run onboarding request; the server decides whether the free first batch applies.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3115,7 +3142,7 @@ class DocumentsApi:
         :type x_yggy_organization_id: str
         :param file: The document file to upload. Optional when text is set.
         :type file: bytearray
-        :param text: Plain text or markdown body. Used when no file is uploaded.
+        :param text: Plain text or markdown body. Used when no file is uploaded: it is processed like an uploaded markdown file. With noteKind it becomes a yggy note instead.
         :type text: str
         :param note_kind: Note kind. When set, the upload is stored on the caller's personal organization.
         :type note_kind: str
@@ -3129,12 +3156,18 @@ class DocumentsApi:
         :type source: str
         :param origin_system: Business system the data originates from
         :type origin_system: str
+        :param external_id: Your own id for the document. Returned as externalId in query results and chat citations.
+        :type external_id: str
+        :param metadata: JSON object of your own key-value pairs for the document, for example {\\\"region\\\":\\\"EU\\\",\\\"priority\\\":2}. Values are strings, numbers or booleans; at most 50 keys and 8192 bytes. Returned as metadata in query results and chat citations.
+        :type metadata: str
         :param project_id2: Project ID to bind the document to at upload time
         :type project_id2: str
         :param desired_tier: Model tier for extraction. Defaults to auto.
         :type desired_tier: str
         :param inference_mode: Inference routing for extraction. Defaults to org settings.
         :type inference_mode: str
+        :param onboarding: First-run onboarding request; the server decides whether the free first batch applies.
+        :type onboarding: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3168,9 +3201,12 @@ class DocumentsApi:
             title=title,
             source=source,
             origin_system=origin_system,
+            external_id=external_id,
+            metadata=metadata,
             project_id2=project_id2,
             desired_tier=desired_tier,
             inference_mode=inference_mode,
+            onboarding=onboarding,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3201,9 +3237,12 @@ class DocumentsApi:
         title,
         source,
         origin_system,
+        external_id,
+        metadata,
         project_id2,
         desired_tier,
         inference_mode,
+        onboarding,
         _request_auth,
         _content_type,
         _headers,
@@ -3248,12 +3287,18 @@ class DocumentsApi:
             _form_params.append(('source', source))
         if origin_system is not None:
             _form_params.append(('originSystem', origin_system))
+        if external_id is not None:
+            _form_params.append(('externalId', external_id))
+        if metadata is not None:
+            _form_params.append(('metadata', metadata))
         if project_id2 is not None:
             _form_params.append(('projectId', project_id2))
         if desired_tier is not None:
             _form_params.append(('desiredTier', desired_tier))
         if inference_mode is not None:
             _form_params.append(('inferenceMode', inference_mode))
+        if onboarding is not None:
+            _form_params.append(('onboarding', onboarding))
         # process the body parameter
 
 

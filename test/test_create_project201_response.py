@@ -45,6 +45,7 @@ class TestCreateProject201Response(unittest.TestCase):
                     organization_id = '', 
                     external_id = '', 
                     kind = 'shared', 
+                    visibility = 'private', 
                     extraction_purpose = '', 
                     extraction_include = [
                         ''
@@ -68,6 +69,7 @@ class TestCreateProject201Response(unittest.TestCase):
                     organization_id = '', 
                     external_id = '', 
                     kind = 'shared', 
+                    visibility = 'private', 
                     extraction_purpose = '', 
                     extraction_include = [
                         ''

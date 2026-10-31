@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **organization_id** | **str** |  | 
 **external_id** | **str** |  | [optional] 
 **kind** | **str** |  | [optional] 
+**visibility** | **str** | Who in the organization can see that this project exists. &#x60;private&#x60; (the default): only project members and organization owners and admins. &#x60;public&#x60;: every organization member sees its name in the project list, but only members can open it. A personal project (My files) is always &#x60;private&#x60;. | 
 **extraction_purpose** | **str** |  | [optional] 
 **extraction_include** | **List[str]** |  | [optional] 
 **extraction_skip** | **List[str]** |  | [optional] 

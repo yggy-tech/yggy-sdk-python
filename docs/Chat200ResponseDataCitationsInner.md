@@ -8,6 +8,10 @@ Name | Type | Description | Notes
 **document_id** | **str** | Document that grounded the answer | 
 **source** | **str** | Caller-supplied source id when present | [optional] 
 **snippet** | **str** | Evidence text when the tool returned it | [optional] 
+**external_id** | **str** | Your own id for the document, as sent on upload | [optional] 
+**origin_system** | **str** | Business system the data originates from | [optional] 
+**web_url** | **str** | Link to the document in your system | [optional] 
+**metadata** | [**Dict[str, QueryProject200ResponseContextsInnerMetadataValue]**](QueryProject200ResponseContextsInnerMetadataValue.md) | Your own key-value pairs, as sent on upload. Imported documents carry fields of their source here. | [optional] 
 
 ## Example
 

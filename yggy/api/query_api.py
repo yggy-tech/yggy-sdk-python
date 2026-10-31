@@ -59,9 +59,9 @@ class QueryApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> QueryProject200Response:
-        """Retrieve ranked documents across the organization
+        """Find the documents that answer a question across the organization
 
-        Return ranked document contexts for a question across every project the caller can access. Same body as the project query, including optional include.
+        Same as the project query, across every project the caller can access. Results from all those projects are ranked together.
 
         :param x_yggy_organization_id:
         :type x_yggy_organization_id: str
@@ -133,9 +133,9 @@ class QueryApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[QueryProject200Response]:
-        """Retrieve ranked documents across the organization
+        """Find the documents that answer a question across the organization
 
-        Return ranked document contexts for a question across every project the caller can access. Same body as the project query, including optional include.
+        Same as the project query, across every project the caller can access. Results from all those projects are ranked together.
 
         :param x_yggy_organization_id:
         :type x_yggy_organization_id: str
@@ -207,9 +207,9 @@ class QueryApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Retrieve ranked documents across the organization
+        """Find the documents that answer a question across the organization
 
-        Return ranked document contexts for a question across every project the caller can access. Same body as the project query, including optional include.
+        Same as the project query, across every project the caller can access. Results from all those projects are ranked together.
 
         :param x_yggy_organization_id:
         :type x_yggy_organization_id: str
@@ -358,9 +358,9 @@ class QueryApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> QueryProject200Response:
-        """Retrieve ranked documents for a project
+        """Find the documents that answer a question in a project
 
-        Return ranked document contexts for a question in one project. Chat remains the conversational surface. This route is retrieve-only. Add include to attach matching entities, triples, or approved identity.
+        Returns the documents in this project that best answer the question, best first, each with the passage that matches and a relevance score. yggy finds them through the facts it extracted (a fact found by the question leads to the document it came from) and through the document title and text. Add `include` to attach the facts of the returned documents, or the entities they mention. This route retrieves only; for a written answer use chat.
 
         :param project_id: (required)
         :type project_id: str
@@ -436,9 +436,9 @@ class QueryApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[QueryProject200Response]:
-        """Retrieve ranked documents for a project
+        """Find the documents that answer a question in a project
 
-        Return ranked document contexts for a question in one project. Chat remains the conversational surface. This route is retrieve-only. Add include to attach matching entities, triples, or approved identity.
+        Returns the documents in this project that best answer the question, best first, each with the passage that matches and a relevance score. yggy finds them through the facts it extracted (a fact found by the question leads to the document it came from) and through the document title and text. Add `include` to attach the facts of the returned documents, or the entities they mention. This route retrieves only; for a written answer use chat.
 
         :param project_id: (required)
         :type project_id: str
@@ -514,9 +514,9 @@ class QueryApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Retrieve ranked documents for a project
+        """Find the documents that answer a question in a project
 
-        Return ranked document contexts for a question in one project. Chat remains the conversational surface. This route is retrieve-only. Add include to attach matching entities, triples, or approved identity.
+        Returns the documents in this project that best answer the question, best first, each with the passage that matches and a relevance score. yggy finds them through the facts it extracted (a fact found by the question leads to the document it came from) and through the document title and text. Add `include` to attach the facts of the returned documents, or the entities they mention. This route retrieves only; for a written answer use chat.
 
         :param project_id: (required)
         :type project_id: str

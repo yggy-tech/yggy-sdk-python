@@ -31,10 +31,10 @@ class QueryProject200Response(BaseModel):
     """
     QueryProject200Response
     """ # noqa: E501
-    answer: StrictStr = Field(description="Short extractive answer from the top context. Empty when nothing was retrieved.")
-    contexts: List[QueryProject200ResponseContextsInner]
-    entities: Optional[List[QueryProject200ResponseEntitiesInner]] = Field(default=None, description="Present when include asks for entities or identity")
-    triples: Optional[List[QueryProject200ResponseTriplesInner]] = Field(default=None, description="Present when include asks for triples")
+    answer: StrictStr = Field(description="The sentence from the best document that answers the question. Empty when nothing matched.")
+    contexts: List[QueryProject200ResponseContextsInner] = Field(description="The documents that answer the question, best first")
+    entities: Optional[List[QueryProject200ResponseEntitiesInner]] = Field(default=None, description="Present when `include` asks for entities or identity")
+    triples: Optional[List[QueryProject200ResponseTriplesInner]] = Field(default=None, description="The facts of the returned documents. Present when `include` asks for facts (or triples).")
     archived_hits: Optional[List[QueryProject200ResponseArchivedHitsInner]] = Field(default=None, description="Present when includeArchived was requested on a single project", alias="archivedHits")
     __properties: ClassVar[List[str]] = ["answer", "contexts", "entities", "triples", "archivedHits"]
 

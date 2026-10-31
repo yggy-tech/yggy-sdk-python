@@ -45,7 +45,8 @@ class TestGetDocumentStatus200ResponseStepsInner(unittest.TestCase):
                 message = '',
                 current = 1.337,
                 total = 1.337,
-                unit = ''
+                unit = '',
+                waited_for_capacity = True
             )
         else:
             return GetDocumentStatus200ResponseStepsInner(

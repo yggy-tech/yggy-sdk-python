@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 # Define package exports
 __all__ = [
@@ -71,6 +71,9 @@ __all__ = [
     "ListDocuments200ResponseDocumentsInner",
     "ListDocuments200ResponseDocumentsInnerAttachedTo",
     "ListDocuments200ResponseDocumentsInnerMailAttachmentsInner",
+    "ListDocuments200ResponseDocumentsInnerStorageLocation",
+    "ListDocuments200ResponseDocumentsInnerStorageLocationOneOf",
+    "ListDocuments200ResponseDocumentsInnerStorageLocationOneOf1",
     "ListGraphExports200Response",
     "ListGraphExports200ResponseExportsInner",
     "ListProjects200Response",
@@ -80,9 +83,12 @@ __all__ = [
     "QueryProject200Response",
     "QueryProject200ResponseArchivedHitsInner",
     "QueryProject200ResponseContextsInner",
+    "QueryProject200ResponseContextsInnerMetadataValue",
     "QueryProject200ResponseEntitiesInner",
     "QueryProject200ResponseEntitiesInnerIdentity",
     "QueryProject200ResponseTriplesInner",
+    "QueryProject200ResponseTriplesInnerObject",
+    "QueryProject200ResponseTriplesInnerPredicate",
     "QueryProject200ResponseTriplesInnerSubject",
     "QueryProjectRequest",
     "RetryDocument202Response",
@@ -147,6 +153,9 @@ from yggy.models.list_documents200_response import ListDocuments200Response as L
 from yggy.models.list_documents200_response_documents_inner import ListDocuments200ResponseDocumentsInner as ListDocuments200ResponseDocumentsInner
 from yggy.models.list_documents200_response_documents_inner_attached_to import ListDocuments200ResponseDocumentsInnerAttachedTo as ListDocuments200ResponseDocumentsInnerAttachedTo
 from yggy.models.list_documents200_response_documents_inner_mail_attachments_inner import ListDocuments200ResponseDocumentsInnerMailAttachmentsInner as ListDocuments200ResponseDocumentsInnerMailAttachmentsInner
+from yggy.models.list_documents200_response_documents_inner_storage_location import ListDocuments200ResponseDocumentsInnerStorageLocation as ListDocuments200ResponseDocumentsInnerStorageLocation
+from yggy.models.list_documents200_response_documents_inner_storage_location_one_of import ListDocuments200ResponseDocumentsInnerStorageLocationOneOf as ListDocuments200ResponseDocumentsInnerStorageLocationOneOf
+from yggy.models.list_documents200_response_documents_inner_storage_location_one_of1 import ListDocuments200ResponseDocumentsInnerStorageLocationOneOf1 as ListDocuments200ResponseDocumentsInnerStorageLocationOneOf1
 from yggy.models.list_graph_exports200_response import ListGraphExports200Response as ListGraphExports200Response
 from yggy.models.list_graph_exports200_response_exports_inner import ListGraphExports200ResponseExportsInner as ListGraphExports200ResponseExportsInner
 from yggy.models.list_projects200_response import ListProjects200Response as ListProjects200Response
@@ -156,9 +165,12 @@ from yggy.models.list_projects400_response_error import ListProjects400ResponseE
 from yggy.models.query_project200_response import QueryProject200Response as QueryProject200Response
 from yggy.models.query_project200_response_archived_hits_inner import QueryProject200ResponseArchivedHitsInner as QueryProject200ResponseArchivedHitsInner
 from yggy.models.query_project200_response_contexts_inner import QueryProject200ResponseContextsInner as QueryProject200ResponseContextsInner
+from yggy.models.query_project200_response_contexts_inner_metadata_value import QueryProject200ResponseContextsInnerMetadataValue as QueryProject200ResponseContextsInnerMetadataValue
 from yggy.models.query_project200_response_entities_inner import QueryProject200ResponseEntitiesInner as QueryProject200ResponseEntitiesInner
 from yggy.models.query_project200_response_entities_inner_identity import QueryProject200ResponseEntitiesInnerIdentity as QueryProject200ResponseEntitiesInnerIdentity
 from yggy.models.query_project200_response_triples_inner import QueryProject200ResponseTriplesInner as QueryProject200ResponseTriplesInner
+from yggy.models.query_project200_response_triples_inner_object import QueryProject200ResponseTriplesInnerObject as QueryProject200ResponseTriplesInnerObject
+from yggy.models.query_project200_response_triples_inner_predicate import QueryProject200ResponseTriplesInnerPredicate as QueryProject200ResponseTriplesInnerPredicate
 from yggy.models.query_project200_response_triples_inner_subject import QueryProject200ResponseTriplesInnerSubject as QueryProject200ResponseTriplesInnerSubject
 from yggy.models.query_project_request import QueryProjectRequest as QueryProjectRequest
 from yggy.models.retry_document202_response import RetryDocument202Response as RetryDocument202Response
