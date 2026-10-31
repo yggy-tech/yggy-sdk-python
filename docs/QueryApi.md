@@ -4,16 +4,16 @@ All URIs are relative to *https://api.yggy.tech*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**query_organization**](QueryApi.md#query_organization) | **POST** /api/v1/query | Retrieve ranked documents across the organization
-[**query_project**](QueryApi.md#query_project) | **POST** /api/v1/projects/{projectId}/query | Retrieve ranked documents for a project
+[**query_organization**](QueryApi.md#query_organization) | **POST** /api/v1/query | Find the documents that answer a question across the organization
+[**query_project**](QueryApi.md#query_project) | **POST** /api/v1/projects/{projectId}/query | Find the documents that answer a question in a project
 
 
 # **query_organization**
 > QueryProject200Response query_organization(x_yggy_organization_id=x_yggy_organization_id, query_project_request=query_project_request)
 
-Retrieve ranked documents across the organization
+Find the documents that answer a question across the organization
 
-Return ranked document contexts for a question across every project the caller can access. Same body as the project query, including optional include.
+Same as the project query, across every project the caller can access. Results from all those projects are ranked together.
 
 ### Example
 
@@ -50,7 +50,7 @@ with yggy.ApiClient(configuration) as api_client:
     query_project_request = yggy.QueryProjectRequest() # QueryProjectRequest |  (optional)
 
     try:
-        # Retrieve ranked documents across the organization
+        # Find the documents that answer a question across the organization
         api_response = api_instance.query_organization(x_yggy_organization_id=x_yggy_organization_id, query_project_request=query_project_request)
         print("The response of QueryApi->query_organization:\n")
         pprint(api_response)
@@ -95,9 +95,9 @@ Name | Type | Description  | Notes
 # **query_project**
 > QueryProject200Response query_project(project_id, x_yggy_organization_id=x_yggy_organization_id, query_project_request=query_project_request)
 
-Retrieve ranked documents for a project
+Find the documents that answer a question in a project
 
-Return ranked document contexts for a question in one project. Chat remains the conversational surface. This route is retrieve-only. Add include to attach matching entities, triples, or approved identity.
+Returns the documents in this project that best answer the question, best first, each with the passage that matches and a relevance score. yggy finds them through the facts it extracted (a fact found by the question leads to the document it came from) and through the document title and text. Add `include` to attach the facts of the returned documents, or the entities they mention. This route retrieves only; for a written answer use chat.
 
 ### Example
 
@@ -135,7 +135,7 @@ with yggy.ApiClient(configuration) as api_client:
     query_project_request = yggy.QueryProjectRequest() # QueryProjectRequest |  (optional)
 
     try:
-        # Retrieve ranked documents for a project
+        # Find the documents that answer a question in a project
         api_response = api_instance.query_project(project_id, x_yggy_organization_id=x_yggy_organization_id, query_project_request=query_project_request)
         print("The response of QueryApi->query_project:\n")
         pprint(api_response)

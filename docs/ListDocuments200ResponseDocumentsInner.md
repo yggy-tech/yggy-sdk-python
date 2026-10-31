@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **source** | **str** |  | [optional] 
 **source_kind** | **str** |  | [optional] 
 **origin_system** | **str** |  | [optional] 
+**source_external_id** | **str** |  | [optional] 
 **owner_external_id** | **str** |  | [optional] 
 **owner_display_name** | **str** |  | [optional] 
 **content_type** | **str** |  | 
@@ -22,6 +23,7 @@ Name | Type | Description | Notes
 **error** | **str** |  | [optional] 
 **code** | **str** |  | [optional] 
 **failure_message** | **str** |  | [optional] 
+**failed_stage** | **str** |  | [optional] 
 **storage_url** | **str** |  | [optional] 
 **deleted_at** | **str** |  | [optional] 
 **note_kind** | **str** |  | [optional] 
@@ -40,6 +42,7 @@ Name | Type | Description | Notes
 **source_author** | **str** |  | [optional] 
 **source_metadata** | **str** |  | [optional] 
 **attached_to** | [**ListDocuments200ResponseDocumentsInnerAttachedTo**](ListDocuments200ResponseDocumentsInnerAttachedTo.md) |  | [optional] 
+**storage_location** | [**ListDocuments200ResponseDocumentsInnerStorageLocation**](ListDocuments200ResponseDocumentsInnerStorageLocation.md) |  | [optional] 
 **mail_attachments** | [**List[ListDocuments200ResponseDocumentsInnerMailAttachmentsInner]**](ListDocuments200ResponseDocumentsInnerMailAttachmentsInner.md) |  | [optional] 
 **project_external_id** | **str** |  | [optional] 
 

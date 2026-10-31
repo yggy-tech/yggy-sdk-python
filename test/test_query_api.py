@@ -30,14 +30,14 @@ class TestQueryApi(unittest.TestCase):
     def test_query_organization(self) -> None:
         """Test case for query_organization
 
-        Retrieve ranked documents across the organization
+        Find the documents that answer a question across the organization
         """
         pass
 
     def test_query_project(self) -> None:
         """Test case for query_project
 
-        Retrieve ranked documents for a project
+        Find the documents that answer a question in a project
         """
         pass
 

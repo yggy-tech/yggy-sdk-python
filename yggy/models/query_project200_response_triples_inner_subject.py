@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class QueryProject200ResponseTriplesInnerSubject(BaseModel):
     """
-    QueryProject200ResponseTriplesInnerSubject
+    What the fact is about
     """ # noqa: E501
     uri: Optional[StrictStr] = Field(default=None, description="Public HTTPS URI when one is stored")
     label: StrictStr

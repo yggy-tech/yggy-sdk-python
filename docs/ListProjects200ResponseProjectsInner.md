@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **organization_id** | **str** |  | 
 **external_id** | **str** |  | [optional] 
 **kind** | **str** |  | [optional] 
+**visibility** | **str** | Who in the organization can see that this project exists. &#x60;private&#x60; (the default): only project members and organization owners and admins. &#x60;public&#x60;: every organization member sees its name in the project list, but only members can open it. A personal project (My files) is always &#x60;private&#x60;. | 
 **extraction_purpose** | **str** |  | [optional] 
 **extraction_include** | **List[str]** |  | [optional] 
 **extraction_skip** | **List[str]** |  | [optional] 
@@ -19,9 +20,10 @@ Name | Type | Description | Notes
 **entity_merge_mode** | **str** |  | [optional] 
 **created_at** | **str** |  | [optional] 
 **updated_at** | **str** |  | [optional] 
-**document_count** | **int** |  | 
-**triple_count** | **int** |  | 
-**entity_count** | **int** |  | 
+**document_count** | **int** | Documents in the project. Null when &#x60;isMember&#x60; is false: a public project&#39;s numbers are for its members only. | 
+**triple_count** | **int** | Relations (triples) in the project. Null when &#x60;isMember&#x60; is false: a public project&#39;s numbers are for its members only. | 
+**entity_count** | **int** | Entities in the project. Null when &#x60;isMember&#x60; is false: a public project&#39;s numbers are for its members only. | 
+**is_member** | **bool** | True when the caller can open the project: a project member, an organization owner or admin, or an organization API key. False for a public project the caller is not a member of. | 
 
 ## Example
 

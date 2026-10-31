@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**answer** | **str** | Short extractive answer from the top context. Empty when nothing was retrieved. | 
-**contexts** | [**List[QueryProject200ResponseContextsInner]**](QueryProject200ResponseContextsInner.md) |  | 
-**entities** | [**List[QueryProject200ResponseEntitiesInner]**](QueryProject200ResponseEntitiesInner.md) | Present when include asks for entities or identity | [optional] 
-**triples** | [**List[QueryProject200ResponseTriplesInner]**](QueryProject200ResponseTriplesInner.md) | Present when include asks for triples | [optional] 
+**answer** | **str** | The sentence from the best document that answers the question. Empty when nothing matched. | 
+**contexts** | [**List[QueryProject200ResponseContextsInner]**](QueryProject200ResponseContextsInner.md) | The documents that answer the question, best first | 
+**entities** | [**List[QueryProject200ResponseEntitiesInner]**](QueryProject200ResponseEntitiesInner.md) | Present when &#x60;include&#x60; asks for entities or identity | [optional] 
+**triples** | [**List[QueryProject200ResponseTriplesInner]**](QueryProject200ResponseTriplesInner.md) | The facts of the returned documents. Present when &#x60;include&#x60; asks for facts (or triples). | [optional] 
 **archived_hits** | [**List[QueryProject200ResponseArchivedHitsInner]**](QueryProject200ResponseArchivedHitsInner.md) | Present when includeArchived was requested on a single project | [optional] 
 
 ## Example

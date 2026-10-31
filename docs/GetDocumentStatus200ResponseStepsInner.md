@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **current** | **float** |  | [optional] 
 **total** | **float** |  | [optional] 
 **unit** | **str** |  | [optional] 
+**waited_for_capacity** | **bool** |  | [optional] 
 
 ## Example
 

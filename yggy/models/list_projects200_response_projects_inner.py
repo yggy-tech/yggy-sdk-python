@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
@@ -35,6 +35,7 @@ class ListProjects200ResponseProjectsInner(BaseModel):
     organization_id: StrictStr = Field(alias="organizationId")
     external_id: Optional[StrictStr] = Field(default=None, alias="externalId")
     kind: Optional[StrictStr] = None
+    visibility: StrictStr = Field(description="Who in the organization can see that this project exists. `private` (the default): only project members and organization owners and admins. `public`: every organization member sees its name in the project list, but only members can open it. A personal project (My files) is always `private`.")
     extraction_purpose: Optional[Annotated[str, Field(strict=True, max_length=500)]] = Field(default=None, alias="extractionPurpose")
     extraction_include: Optional[Annotated[List[Annotated[str, Field(strict=True, max_length=120)]], Field(max_length=25)]] = Field(default=None, alias="extractionInclude")
     extraction_skip: Optional[Annotated[List[Annotated[str, Field(strict=True, max_length=120)]], Field(max_length=25)]] = Field(default=None, alias="extractionSkip")
@@ -42,10 +43,11 @@ class ListProjects200ResponseProjectsInner(BaseModel):
     entity_merge_mode: Optional[StrictStr] = Field(default=None, alias="entityMergeMode")
     created_at: Optional[StrictStr] = Field(default=None, alias="createdAt")
     updated_at: Optional[StrictStr] = Field(default=None, alias="updatedAt")
-    document_count: Annotated[int, Field(strict=True, ge=0)] = Field(alias="documentCount")
-    triple_count: Annotated[int, Field(strict=True, ge=0)] = Field(alias="tripleCount")
-    entity_count: Annotated[int, Field(strict=True, ge=0)] = Field(alias="entityCount")
-    __properties: ClassVar[List[str]] = ["id", "slug", "name", "color", "organizationId", "externalId", "kind", "extractionPurpose", "extractionInclude", "extractionSkip", "extractionGuidanceRevision", "entityMergeMode", "createdAt", "updatedAt", "documentCount", "tripleCount", "entityCount"]
+    document_count: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(description="Documents in the project. Null when `isMember` is false: a public project's numbers are for its members only.", alias="documentCount")
+    triple_count: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(description="Relations (triples) in the project. Null when `isMember` is false: a public project's numbers are for its members only.", alias="tripleCount")
+    entity_count: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(description="Entities in the project. Null when `isMember` is false: a public project's numbers are for its members only.", alias="entityCount")
+    is_member: StrictBool = Field(description="True when the caller can open the project: a project member, an organization owner or admin, or an organization API key. False for a public project the caller is not a member of.", alias="isMember")
+    __properties: ClassVar[List[str]] = ["id", "slug", "name", "color", "organizationId", "externalId", "kind", "visibility", "extractionPurpose", "extractionInclude", "extractionSkip", "extractionGuidanceRevision", "entityMergeMode", "createdAt", "updatedAt", "documentCount", "tripleCount", "entityCount", "isMember"]
 
     @field_validator('kind')
     def kind_validate_enum(cls, value):
@@ -55,6 +57,13 @@ class ListProjects200ResponseProjectsInner(BaseModel):
 
         if value not in set(['shared', 'personal']):
             raise ValueError("must be one of enum values ('shared', 'personal')")
+        return value
+
+    @field_validator('visibility')
+    def visibility_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['private', 'public']):
+            raise ValueError("must be one of enum values ('private', 'public')")
         return value
 
     @field_validator('entity_merge_mode')
@@ -116,6 +125,21 @@ class ListProjects200ResponseProjectsInner(BaseModel):
         if self.extraction_purpose is None and "extraction_purpose" in self.model_fields_set:
             _dict['extractionPurpose'] = None
 
+        # set to None if document_count (nullable) is None
+        # and model_fields_set contains the field
+        if self.document_count is None and "document_count" in self.model_fields_set:
+            _dict['documentCount'] = None
+
+        # set to None if triple_count (nullable) is None
+        # and model_fields_set contains the field
+        if self.triple_count is None and "triple_count" in self.model_fields_set:
+            _dict['tripleCount'] = None
+
+        # set to None if entity_count (nullable) is None
+        # and model_fields_set contains the field
+        if self.entity_count is None and "entity_count" in self.model_fields_set:
+            _dict['entityCount'] = None
+
         return _dict
 
     @classmethod
@@ -135,6 +159,7 @@ class ListProjects200ResponseProjectsInner(BaseModel):
             "organizationId": obj.get("organizationId"),
             "externalId": obj.get("externalId"),
             "kind": obj.get("kind"),
+            "visibility": obj.get("visibility"),
             "extractionPurpose": obj.get("extractionPurpose"),
             "extractionInclude": obj.get("extractionInclude"),
             "extractionSkip": obj.get("extractionSkip"),
@@ -144,7 +169,8 @@ class ListProjects200ResponseProjectsInner(BaseModel):
             "updatedAt": obj.get("updatedAt"),
             "documentCount": obj.get("documentCount"),
             "tripleCount": obj.get("tripleCount"),
-            "entityCount": obj.get("entityCount")
+            "entityCount": obj.get("entityCount"),
+            "isMember": obj.get("isMember")
         })
         return _obj
 

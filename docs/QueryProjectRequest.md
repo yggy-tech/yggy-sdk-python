@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**question** | **str** | Natural-language question to retrieve documents for | 
-**top_k** | **int** | Maximum number of ranked contexts to return | [optional] [default to 5]
-**mode** | **str** | hybrid combines document text with graph matches; lexical uses document text only; graph uses graph matches only | [optional] [default to 'hybrid']
-**include** | **List[str]** | Optional graph fields to attach. Omit for the default retrieve body. identity alone returns only entities with an approved identity. | [optional] 
-**include_archived** | **bool** | Also search cold triples. Archived hits surface separately and trigger a background promote. Single-project scope only. | [optional] [default to False]
+**question** | **str** | The question in plain language. yggy finds the documents that answer it. | 
+**top_k** | **int** | How many documents to return, best first. | [optional] [default to 5]
+**mode** | **str** | How documents are found and ranked. &#x60;hybrid&#x60; (default) uses the facts yggy extracted and the document text; &#x60;lexical&#x60; uses the document text only; &#x60;graph&#x60; returns only documents the extracted facts point to. | [optional] [default to 'hybrid']
+**include** | **List[str]** | Extra knowledge to attach to the answer. &#x60;facts&#x60; (also accepted as &#x60;triples&#x60;) adds the facts extracted from the returned documents; &#x60;entities&#x60; adds the people, organizations and things they mention; &#x60;identity&#x60; adds only entities with an approved identity, such as a register number. | [optional] 
+**include_archived** | **bool** | Also search archived facts. They are returned in &#x60;archivedHits&#x60; and brought back into the live graph in the background. Project queries only. | [optional] [default to False]
 
 ## Example
 

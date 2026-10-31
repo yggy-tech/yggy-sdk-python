@@ -28,11 +28,11 @@ class QueryProjectRequest(BaseModel):
     """
     QueryProjectRequest
     """ # noqa: E501
-    question: Annotated[str, Field(min_length=1, strict=True, max_length=2000)] = Field(description="Natural-language question to retrieve documents for")
-    top_k: Optional[Annotated[int, Field(le=20, strict=True, ge=1)]] = Field(default=5, description="Maximum number of ranked contexts to return", alias="topK")
-    mode: Optional[StrictStr] = Field(default='hybrid', description="hybrid combines document text with graph matches; lexical uses document text only; graph uses graph matches only")
-    include: Optional[Annotated[List[StrictStr], Field(max_length=3)]] = Field(default=None, description="Optional graph fields to attach. Omit for the default retrieve body. identity alone returns only entities with an approved identity.")
-    include_archived: Optional[StrictBool] = Field(default=False, description="Also search cold triples. Archived hits surface separately and trigger a background promote. Single-project scope only.", alias="includeArchived")
+    question: Annotated[str, Field(min_length=1, strict=True, max_length=2000)] = Field(description="The question in plain language. yggy finds the documents that answer it.")
+    top_k: Optional[Annotated[int, Field(le=20, strict=True, ge=1)]] = Field(default=5, description="How many documents to return, best first.", alias="topK")
+    mode: Optional[StrictStr] = Field(default='hybrid', description="How documents are found and ranked. `hybrid` (default) uses the facts yggy extracted and the document text; `lexical` uses the document text only; `graph` returns only documents the extracted facts point to.")
+    include: Optional[Annotated[List[StrictStr], Field(max_length=4)]] = Field(default=None, description="Extra knowledge to attach to the answer. `facts` (also accepted as `triples`) adds the facts extracted from the returned documents; `entities` adds the people, organizations and things they mention; `identity` adds only entities with an approved identity, such as a register number.")
+    include_archived: Optional[StrictBool] = Field(default=False, description="Also search archived facts. They are returned in `archivedHits` and brought back into the live graph in the background. Project queries only.", alias="includeArchived")
     __properties: ClassVar[List[str]] = ["question", "topK", "mode", "include", "includeArchived"]
 
     @field_validator('mode')
@@ -52,8 +52,8 @@ class QueryProjectRequest(BaseModel):
             return value
 
         for i in value:
-            if i not in set(['entities', 'triples', 'identity']):
-                raise ValueError("each list item must be one of ('entities', 'triples', 'identity')")
+            if i not in set(['entities', 'triples', 'identity', 'facts']):
+                raise ValueError("each list item must be one of ('entities', 'triples', 'identity', 'facts')")
         return value
 
     model_config = ConfigDict(

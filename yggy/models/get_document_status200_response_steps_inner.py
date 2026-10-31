@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
@@ -37,7 +37,8 @@ class GetDocumentStatus200ResponseStepsInner(BaseModel):
     current: Optional[Union[StrictFloat, StrictInt]] = None
     total: Optional[Union[StrictFloat, StrictInt]] = None
     unit: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "status", "startedAt", "completedAt", "durationMs", "message", "current", "total", "unit"]
+    waited_for_capacity: Optional[StrictBool] = Field(default=None, alias="waitedForCapacity")
+    __properties: ClassVar[List[str]] = ["id", "name", "status", "startedAt", "completedAt", "durationMs", "message", "current", "total", "unit", "waitedForCapacity"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -106,7 +107,8 @@ class GetDocumentStatus200ResponseStepsInner(BaseModel):
             "message": obj.get("message"),
             "current": obj.get("current"),
             "total": obj.get("total"),
-            "unit": obj.get("unit")
+            "unit": obj.get("unit"),
+            "waitedForCapacity": obj.get("waitedForCapacity")
         })
         return _obj
 
