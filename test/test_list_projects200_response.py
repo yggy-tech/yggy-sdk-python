@@ -46,6 +46,7 @@ class TestListProjects200Response(unittest.TestCase):
                         organization_id = '', 
                         external_id = '', 
                         kind = 'shared', 
+                        visibility = 'private', 
                         extraction_purpose = '', 
                         extraction_include = [
                             ''
@@ -59,7 +60,8 @@ class TestListProjects200Response(unittest.TestCase):
                         updated_at = '', 
                         document_count = 0, 
                         triple_count = 0, 
-                        entity_count = 0, )
+                        entity_count = 0, 
+                        is_member = True, )
                     ],
                 pinned = [
                     yggy.models.list_projects_200_response_projects_inner.listProjects_200_response_projects_inner(
@@ -70,6 +72,7 @@ class TestListProjects200Response(unittest.TestCase):
                         organization_id = '', 
                         external_id = '', 
                         kind = 'shared', 
+                        visibility = 'private', 
                         extraction_purpose = '', 
                         extraction_include = [
                             ''
@@ -83,7 +86,8 @@ class TestListProjects200Response(unittest.TestCase):
                         updated_at = '', 
                         document_count = 0, 
                         triple_count = 0, 
-                        entity_count = 0, )
+                        entity_count = 0, 
+                        is_member = True, )
                     ],
                 personal = yggy.models.list_projects_200_response_projects_inner.listProjects_200_response_projects_inner(
                     id = '', 
@@ -93,6 +97,7 @@ class TestListProjects200Response(unittest.TestCase):
                     organization_id = '', 
                     external_id = '', 
                     kind = 'shared', 
+                    visibility = 'private', 
                     extraction_purpose = '', 
                     extraction_include = [
                         ''
@@ -106,7 +111,8 @@ class TestListProjects200Response(unittest.TestCase):
                     updated_at = '', 
                     document_count = 0, 
                     triple_count = 0, 
-                    entity_count = 0, ),
+                    entity_count = 0, 
+                    is_member = True, ),
                 total = 0,
                 limit = 56,
                 offset = 0
@@ -123,6 +129,7 @@ class TestListProjects200Response(unittest.TestCase):
                         organization_id = '', 
                         external_id = '', 
                         kind = 'shared', 
+                        visibility = 'private', 
                         extraction_purpose = '', 
                         extraction_include = [
                             ''
@@ -136,7 +143,8 @@ class TestListProjects200Response(unittest.TestCase):
                         updated_at = '', 
                         document_count = 0, 
                         triple_count = 0, 
-                        entity_count = 0, )
+                        entity_count = 0, 
+                        is_member = True, )
                     ],
                 pinned = [
                     yggy.models.list_projects_200_response_projects_inner.listProjects_200_response_projects_inner(
@@ -147,6 +155,7 @@ class TestListProjects200Response(unittest.TestCase):
                         organization_id = '', 
                         external_id = '', 
                         kind = 'shared', 
+                        visibility = 'private', 
                         extraction_purpose = '', 
                         extraction_include = [
                             ''
@@ -160,7 +169,8 @@ class TestListProjects200Response(unittest.TestCase):
                         updated_at = '', 
                         document_count = 0, 
                         triple_count = 0, 
-                        entity_count = 0, )
+                        entity_count = 0, 
+                        is_member = True, )
                     ],
                 personal = yggy.models.list_projects_200_response_projects_inner.listProjects_200_response_projects_inner(
                     id = '', 
@@ -170,6 +180,7 @@ class TestListProjects200Response(unittest.TestCase):
                     organization_id = '', 
                     external_id = '', 
                     kind = 'shared', 
+                    visibility = 'private', 
                     extraction_purpose = '', 
                     extraction_include = [
                         ''
@@ -183,7 +194,8 @@ class TestListProjects200Response(unittest.TestCase):
                     updated_at = '', 
                     document_count = 0, 
                     triple_count = 0, 
-                    entity_count = 0, ),
+                    entity_count = 0, 
+                    is_member = True, ),
                 total = 0,
                 limit = 56,
                 offset = 0,

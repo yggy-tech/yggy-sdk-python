@@ -44,7 +44,20 @@ class TestQueryProject200Response(unittest.TestCase):
                         source = '', 
                         title = '', 
                         snippet = '', 
-                        score = 1.337, )
+                        score = 1.337, 
+                        status = 'COMPLETED', 
+                        path = [
+                            yggy.models.query_project_200_response_contexts_inner_path_inner.queryProject_200_response_contexts_inner_path_inner(
+                                subject = '', 
+                                predicate = '', 
+                                object = '', )
+                            ], 
+                        external_id = '', 
+                        origin_system = '', 
+                        web_url = '', 
+                        metadata = {
+                            'key' : null
+                            }, )
                     ],
                 entities = [
                     yggy.models.query_project_200_response_entities_inner.queryProject_200_response_entities_inner(
@@ -64,11 +77,14 @@ class TestQueryProject200Response(unittest.TestCase):
                         subject = yggy.models.query_project_200_response_triples_inner_subject.queryProject_200_response_triples_inner_subject(
                             uri = '', 
                             label = '', ), 
-                        predicate = yggy.models.query_project_200_response_triples_inner_subject.queryProject_200_response_triples_inner_subject(
+                        predicate = yggy.models.query_project_200_response_triples_inner_predicate.queryProject_200_response_triples_inner_predicate(
                             uri = '', 
                             label = '', ), 
-                        object = , 
+                        object = yggy.models.query_project_200_response_triples_inner_object.queryProject_200_response_triples_inner_object(
+                            uri = '', 
+                            label = '', ), 
                         evidence = '', 
+                        measures = '', 
                         document_id = '', )
                     ],
                 archived_hits = [
@@ -76,7 +92,15 @@ class TestQueryProject200Response(unittest.TestCase):
                         triple_key = '', 
                         text = '', 
                         score = 1.337, )
-                    ]
+                    ],
+                graph = yggy.models.query_project_200_response_graph.queryProject_200_response_graph(
+                    hops = 56, 
+                    seeds = 56, 
+                    reached = yggy.models.query_project_200_response_graph_reached.queryProject_200_response_graph_reached(
+                        entities = 56, 
+                        facts = 56, 
+                        documents = 56, ), 
+                    truncated = True, )
             )
         else:
             return QueryProject200Response(
@@ -88,7 +112,20 @@ class TestQueryProject200Response(unittest.TestCase):
                         source = '', 
                         title = '', 
                         snippet = '', 
-                        score = 1.337, )
+                        score = 1.337, 
+                        status = 'COMPLETED', 
+                        path = [
+                            yggy.models.query_project_200_response_contexts_inner_path_inner.queryProject_200_response_contexts_inner_path_inner(
+                                subject = '', 
+                                predicate = '', 
+                                object = '', )
+                            ], 
+                        external_id = '', 
+                        origin_system = '', 
+                        web_url = '', 
+                        metadata = {
+                            'key' : null
+                            }, )
                     ],
         )
         """

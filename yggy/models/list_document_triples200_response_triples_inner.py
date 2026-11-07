@@ -37,6 +37,8 @@ class ListDocumentTriples200ResponseTriplesInner(BaseModel):
     subject_id: Optional[StrictStr] = Field(default=None, alias="subjectId")
     subject_type: Optional[StrictStr] = Field(default=None, alias="subjectType")
     subject_identity_uri: Optional[StrictStr] = Field(default=None, alias="subjectIdentityUri")
+    subject_status: Optional[StrictStr] = Field(default=None, alias="subjectStatus")
+    object_status: Optional[StrictStr] = Field(default=None, alias="objectStatus")
     object_id: Optional[StrictStr] = Field(default=None, alias="objectId")
     object_type: Optional[StrictStr] = Field(default=None, alias="objectType")
     object_identity_uri: Optional[StrictStr] = Field(default=None, alias="objectIdentityUri")
@@ -48,7 +50,27 @@ class ListDocumentTriples200ResponseTriplesInner(BaseModel):
     note: Optional[StrictStr] = None
     created_at: Optional[StrictStr] = None
     status: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["id", "subject", "predicate", "object", "subjectIdentity", "subjectId", "subjectType", "subjectIdentityUri", "objectId", "objectType", "objectIdentityUri", "qualifiers", "source", "extractionMethod", "evidence", "evidenceRegionId", "note", "created_at", "status"]
+    __properties: ClassVar[List[str]] = ["id", "subject", "predicate", "object", "subjectIdentity", "subjectId", "subjectType", "subjectIdentityUri", "subjectStatus", "objectStatus", "objectId", "objectType", "objectIdentityUri", "qualifiers", "source", "extractionMethod", "evidence", "evidenceRegionId", "note", "created_at", "status"]
+
+    @field_validator('subject_status')
+    def subject_status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['ACTIVE', 'SUPERSEDED', 'CONFLICTING', 'RETRACTED', 'PENDING_ONTOLOGY', 'SOURCE_DELETED']):
+            raise ValueError("must be one of enum values ('ACTIVE', 'SUPERSEDED', 'CONFLICTING', 'RETRACTED', 'PENDING_ONTOLOGY', 'SOURCE_DELETED')")
+        return value
+
+    @field_validator('object_status')
+    def object_status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['ACTIVE', 'SUPERSEDED', 'CONFLICTING', 'RETRACTED', 'PENDING_ONTOLOGY', 'SOURCE_DELETED']):
+            raise ValueError("must be one of enum values ('ACTIVE', 'SUPERSEDED', 'CONFLICTING', 'RETRACTED', 'PENDING_ONTOLOGY', 'SOURCE_DELETED')")
+        return value
 
     @field_validator('extraction_method')
     def extraction_method_validate_enum(cls, value):
@@ -135,6 +157,8 @@ class ListDocumentTriples200ResponseTriplesInner(BaseModel):
             "subjectId": obj.get("subjectId"),
             "subjectType": obj.get("subjectType"),
             "subjectIdentityUri": obj.get("subjectIdentityUri"),
+            "subjectStatus": obj.get("subjectStatus"),
+            "objectStatus": obj.get("objectStatus"),
             "objectId": obj.get("objectId"),
             "objectType": obj.get("objectType"),
             "objectIdentityUri": obj.get("objectIdentityUri"),

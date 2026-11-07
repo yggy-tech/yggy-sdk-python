@@ -35,6 +35,7 @@ class CreateProject201ResponseProject(BaseModel):
     organization_id: StrictStr = Field(alias="organizationId")
     external_id: Optional[StrictStr] = Field(default=None, alias="externalId")
     kind: Optional[StrictStr] = None
+    visibility: StrictStr = Field(description="Who in the organization can see that this project exists. `private` (the default): only project members and organization owners and admins. `public`: every organization member sees its name in the project list, but only members can open it. A personal project (My files) is always `private`.")
     extraction_purpose: Optional[Annotated[str, Field(strict=True, max_length=500)]] = Field(default=None, alias="extractionPurpose")
     extraction_include: Optional[Annotated[List[Annotated[str, Field(strict=True, max_length=120)]], Field(max_length=25)]] = Field(default=None, alias="extractionInclude")
     extraction_skip: Optional[Annotated[List[Annotated[str, Field(strict=True, max_length=120)]], Field(max_length=25)]] = Field(default=None, alias="extractionSkip")
@@ -42,7 +43,7 @@ class CreateProject201ResponseProject(BaseModel):
     entity_merge_mode: Optional[StrictStr] = Field(default=None, alias="entityMergeMode")
     created_at: Optional[StrictStr] = Field(default=None, alias="createdAt")
     updated_at: Optional[StrictStr] = Field(default=None, alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["id", "slug", "name", "color", "organizationId", "externalId", "kind", "extractionPurpose", "extractionInclude", "extractionSkip", "extractionGuidanceRevision", "entityMergeMode", "createdAt", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["id", "slug", "name", "color", "organizationId", "externalId", "kind", "visibility", "extractionPurpose", "extractionInclude", "extractionSkip", "extractionGuidanceRevision", "entityMergeMode", "createdAt", "updatedAt"]
 
     @field_validator('kind')
     def kind_validate_enum(cls, value):
@@ -52,6 +53,13 @@ class CreateProject201ResponseProject(BaseModel):
 
         if value not in set(['shared', 'personal']):
             raise ValueError("must be one of enum values ('shared', 'personal')")
+        return value
+
+    @field_validator('visibility')
+    def visibility_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['private', 'public']):
+            raise ValueError("must be one of enum values ('private', 'public')")
         return value
 
     @field_validator('entity_merge_mode')
@@ -132,6 +140,7 @@ class CreateProject201ResponseProject(BaseModel):
             "organizationId": obj.get("organizationId"),
             "externalId": obj.get("externalId"),
             "kind": obj.get("kind"),
+            "visibility": obj.get("visibility"),
             "extractionPurpose": obj.get("extractionPurpose"),
             "extractionInclude": obj.get("extractionInclude"),
             "extractionSkip": obj.get("extractionSkip"),

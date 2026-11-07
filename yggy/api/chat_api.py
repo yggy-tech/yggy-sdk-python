@@ -103,6 +103,7 @@ class ChatApi:
             '401': "Chat401Response",
             '403': "Chat401Response",
             '500': "Chat401Response",
+            '504': "Chat401Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -177,6 +178,7 @@ class ChatApi:
             '401': "Chat401Response",
             '403': "Chat401Response",
             '500': "Chat401Response",
+            '504': "Chat401Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -251,6 +253,7 @@ class ChatApi:
             '401': "Chat401Response",
             '403': "Chat401Response",
             '500': "Chat401Response",
+            '504': "Chat401Response",
         }
         response_data = self.api_client.call_api(
             *_param,

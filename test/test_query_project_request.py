@@ -42,7 +42,8 @@ class TestQueryProjectRequest(unittest.TestCase):
                 include = [
                     'entities'
                     ],
-                include_archived = True
+                include_archived = True,
+                hops = 0
             )
         else:
             return QueryProjectRequest(

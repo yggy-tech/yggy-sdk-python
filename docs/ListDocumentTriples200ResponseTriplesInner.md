@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **subject_id** | **str** |  | [optional] 
 **subject_type** | **str** |  | [optional] 
 **subject_identity_uri** | **str** |  | [optional] 
+**subject_status** | **str** |  | [optional] 
+**object_status** | **str** |  | [optional] 
 **object_id** | **str** |  | [optional] 
 **object_type** | **str** |  | [optional] 
 **object_identity_uri** | **str** |  | [optional] 
