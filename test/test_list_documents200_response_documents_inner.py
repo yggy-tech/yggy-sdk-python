@@ -43,6 +43,7 @@ class TestListDocuments200ResponseDocumentsInner(unittest.TestCase):
                 source = '',
                 source_kind = 'UPLOAD',
                 origin_system = '',
+                source_external_id = '',
                 owner_external_id = '',
                 owner_display_name = '',
                 content_type = '',
@@ -53,6 +54,7 @@ class TestListDocuments200ResponseDocumentsInner(unittest.TestCase):
                 error = '',
                 code = '',
                 failure_message = '',
+                failed_stage = 'parse',
                 storage_url = '',
                 deleted_at = '',
                 note_kind = '',
@@ -73,6 +75,7 @@ class TestListDocuments200ResponseDocumentsInner(unittest.TestCase):
                 attached_to = yggy.models.list_documents_200_response_documents_inner_attached_to.listDocuments_200_response_documents_inner_attachedTo(
                     document_id = '', 
                     title = '', ),
+                storage_location = None,
                 mail_attachments = [
                     yggy.models.list_documents_200_response_documents_inner_mail_attachments_inner.listDocuments_200_response_documents_inner_mailAttachments_inner(
                         document_id = '', 

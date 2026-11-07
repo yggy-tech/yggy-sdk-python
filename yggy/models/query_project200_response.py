@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from yggy.models.query_project200_response_archived_hits_inner import QueryProject200ResponseArchivedHitsInner
 from yggy.models.query_project200_response_contexts_inner import QueryProject200ResponseContextsInner
 from yggy.models.query_project200_response_entities_inner import QueryProject200ResponseEntitiesInner
+from yggy.models.query_project200_response_graph import QueryProject200ResponseGraph
 from yggy.models.query_project200_response_triples_inner import QueryProject200ResponseTriplesInner
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,12 +32,13 @@ class QueryProject200Response(BaseModel):
     """
     QueryProject200Response
     """ # noqa: E501
-    answer: StrictStr = Field(description="Short extractive answer from the top context. Empty when nothing was retrieved.")
-    contexts: List[QueryProject200ResponseContextsInner]
-    entities: Optional[List[QueryProject200ResponseEntitiesInner]] = Field(default=None, description="Present when include asks for entities or identity")
-    triples: Optional[List[QueryProject200ResponseTriplesInner]] = Field(default=None, description="Present when include asks for triples")
+    answer: StrictStr = Field(description="The sentence from the best document that answers the question. Empty when nothing matched.")
+    contexts: List[QueryProject200ResponseContextsInner] = Field(description="The documents that answer the question, best first")
+    entities: Optional[List[QueryProject200ResponseEntitiesInner]] = Field(default=None, description="Present when `include` asks for entities or identity")
+    triples: Optional[List[QueryProject200ResponseTriplesInner]] = Field(default=None, description="The facts of the returned documents. Present when `include` asks for facts (or triples).")
     archived_hits: Optional[List[QueryProject200ResponseArchivedHitsInner]] = Field(default=None, description="Present when includeArchived was requested on a single project", alias="archivedHits")
-    __properties: ClassVar[List[str]] = ["answer", "contexts", "entities", "triples", "archivedHits"]
+    graph: Optional[QueryProject200ResponseGraph] = None
+    __properties: ClassVar[List[str]] = ["answer", "contexts", "entities", "triples", "archivedHits", "graph"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -105,6 +107,9 @@ class QueryProject200Response(BaseModel):
                 if _item_archived_hits:
                     _items.append(_item_archived_hits.to_dict())
             _dict['archivedHits'] = _items
+        # override the default output from pydantic by calling `to_dict()` of graph
+        if self.graph:
+            _dict['graph'] = self.graph.to_dict()
         return _dict
 
     @classmethod
@@ -121,7 +126,8 @@ class QueryProject200Response(BaseModel):
             "contexts": [QueryProject200ResponseContextsInner.from_dict(_item) for _item in obj["contexts"]] if obj.get("contexts") is not None else None,
             "entities": [QueryProject200ResponseEntitiesInner.from_dict(_item) for _item in obj["entities"]] if obj.get("entities") is not None else None,
             "triples": [QueryProject200ResponseTriplesInner.from_dict(_item) for _item in obj["triples"]] if obj.get("triples") is not None else None,
-            "archivedHits": [QueryProject200ResponseArchivedHitsInner.from_dict(_item) for _item in obj["archivedHits"]] if obj.get("archivedHits") is not None else None
+            "archivedHits": [QueryProject200ResponseArchivedHitsInner.from_dict(_item) for _item in obj["archivedHits"]] if obj.get("archivedHits") is not None else None,
+            "graph": QueryProject200ResponseGraph.from_dict(obj["graph"]) if obj.get("graph") is not None else None
         })
         return _obj
 
