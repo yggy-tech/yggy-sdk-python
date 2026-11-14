@@ -47,6 +47,7 @@ class GetDocumentStatus200Response(BaseModel):
     workflow_error: Optional[StrictStr] = Field(default=None, alias="workflowError")
     retryable: Optional[StrictBool] = None
     triples_extracted: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="triplesExtracted")
+    outcome: Optional[StrictStr] = None
     input_tokens: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="inputTokens")
     output_tokens: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="outputTokens")
     extraction_tier: Optional[StrictStr] = Field(default=None, alias="extractionTier")
@@ -56,7 +57,7 @@ class GetDocumentStatus200Response(BaseModel):
     stages: Optional[List[GetDocumentStatus200ResponseStepsInner]] = None
     invocation_id: Optional[StrictStr] = Field(default=None, alias="invocationId")
     updated_at: Union[StrictFloat, StrictInt] = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["documentId", "step", "progress", "message", "paused", "completed", "failed", "stored", "awaitingOntologyReview", "ontologyReviewId", "ontologyProposalCount", "error", "code", "failureMessage", "status", "workflowError", "retryable", "triplesExtracted", "inputTokens", "outputTokens", "extractionTier", "extractionMode", "estimatedRemainingMs", "steps", "stages", "invocationId", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["documentId", "step", "progress", "message", "paused", "completed", "failed", "stored", "awaitingOntologyReview", "ontologyReviewId", "ontologyProposalCount", "error", "code", "failureMessage", "status", "workflowError", "retryable", "triplesExtracted", "outcome", "inputTokens", "outputTokens", "extractionTier", "extractionMode", "estimatedRemainingMs", "steps", "stages", "invocationId", "updatedAt"]
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -66,6 +67,16 @@ class GetDocumentStatus200Response(BaseModel):
 
         if value not in set(['pending', 'running', 'suspended', 'failed']):
             raise ValueError("must be one of enum values ('pending', 'running', 'suspended', 'failed')")
+        return value
+
+    @field_validator('outcome')
+    def outcome_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['unchanged']):
+            raise ValueError("must be one of enum values ('unchanged')")
         return value
 
     @field_validator('extraction_tier')
@@ -171,6 +182,7 @@ class GetDocumentStatus200Response(BaseModel):
             "workflowError": obj.get("workflowError"),
             "retryable": obj.get("retryable"),
             "triplesExtracted": obj.get("triplesExtracted"),
+            "outcome": obj.get("outcome"),
             "inputTokens": obj.get("inputTokens"),
             "outputTokens": obj.get("outputTokens"),
             "extractionTier": obj.get("extractionTier"),

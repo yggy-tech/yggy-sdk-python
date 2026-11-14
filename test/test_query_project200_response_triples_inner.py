@@ -39,13 +39,15 @@ class TestQueryProject200ResponseTriplesInner(unittest.TestCase):
                 subject = yggy.models.query_project_200_response_triples_inner_subject.queryProject_200_response_triples_inner_subject(
                     uri = '', 
                     label = '', ),
-                predicate = yggy.models.query_project_200_response_triples_inner_subject.queryProject_200_response_triples_inner_subject(
+                predicate = yggy.models.query_project_200_response_triples_inner_predicate.queryProject_200_response_triples_inner_predicate(
                     uri = '', 
                     label = '', ),
-                object = yggy.models.query_project_200_response_triples_inner_subject.queryProject_200_response_triples_inner_subject(
+                object = yggy.models.query_project_200_response_triples_inner_object.queryProject_200_response_triples_inner_object(
                     uri = '', 
                     label = '', ),
                 evidence = '',
+                status = 'active',
+                measures = '',
                 document_id = ''
             )
         else:
@@ -53,10 +55,10 @@ class TestQueryProject200ResponseTriplesInner(unittest.TestCase):
                 subject = yggy.models.query_project_200_response_triples_inner_subject.queryProject_200_response_triples_inner_subject(
                     uri = '', 
                     label = '', ),
-                predicate = yggy.models.query_project_200_response_triples_inner_subject.queryProject_200_response_triples_inner_subject(
+                predicate = yggy.models.query_project_200_response_triples_inner_predicate.queryProject_200_response_triples_inner_predicate(
                     uri = '', 
                     label = '', ),
-                object = yggy.models.query_project_200_response_triples_inner_subject.queryProject_200_response_triples_inner_subject(
+                object = yggy.models.query_project_200_response_triples_inner_object.queryProject_200_response_triples_inner_object(
                     uri = '', 
                     label = '', ),
         )

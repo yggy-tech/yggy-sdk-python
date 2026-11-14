@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from yggy.models.query_project200_response_contexts_inner_metadata_value import QueryProject200ResponseContextsInnerMetadataValue
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +31,13 @@ class Chat200ResponseDataCitationsInner(BaseModel):
     document_id: StrictStr = Field(description="Document that grounded the answer", alias="documentId")
     source: Optional[StrictStr] = Field(default=None, description="Caller-supplied source id when present")
     snippet: Optional[StrictStr] = Field(default=None, description="Evidence text when the tool returned it")
-    __properties: ClassVar[List[str]] = ["documentId", "source", "snippet"]
+    image_id: Optional[StrictStr] = Field(default=None, description="Document image the cited passage came from, read from the document text; set with imagePlace", alias="imageId")
+    image_place: Optional[StrictStr] = Field(default=None, description="Where that image sits in the document, e.g. \"Slide 3\"", alias="imagePlace")
+    external_id: Optional[StrictStr] = Field(default=None, description="Your own id for the document, as sent on upload", alias="externalId")
+    origin_system: Optional[StrictStr] = Field(default=None, description="Business system the data originates from", alias="originSystem")
+    web_url: Optional[StrictStr] = Field(default=None, description="Link to the document in your system", alias="webUrl")
+    metadata: Optional[Dict[str, QueryProject200ResponseContextsInnerMetadataValue]] = Field(default=None, description="Your own key-value pairs, as sent on upload. Imported documents carry fields of their source here.")
+    __properties: ClassVar[List[str]] = ["documentId", "source", "snippet", "imageId", "imagePlace", "externalId", "originSystem", "webUrl", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,6 +78,13 @@ class Chat200ResponseDataCitationsInner(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
+        _field_dict = {}
+        if self.metadata:
+            for _key_metadata in self.metadata:
+                if self.metadata[_key_metadata]:
+                    _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict()
+            _dict['metadata'] = _field_dict
         return _dict
 
     @classmethod
@@ -85,7 +99,18 @@ class Chat200ResponseDataCitationsInner(BaseModel):
         _obj = cls.model_validate({
             "documentId": obj.get("documentId"),
             "source": obj.get("source"),
-            "snippet": obj.get("snippet")
+            "snippet": obj.get("snippet"),
+            "imageId": obj.get("imageId"),
+            "imagePlace": obj.get("imagePlace"),
+            "externalId": obj.get("externalId"),
+            "originSystem": obj.get("originSystem"),
+            "webUrl": obj.get("webUrl"),
+            "metadata": dict(
+                (_k, QueryProject200ResponseContextsInnerMetadataValue.from_dict(_v))
+                for _k, _v in obj["metadata"].items()
+            )
+            if obj.get("metadata") is not None
+            else None
         })
         return _obj
 

@@ -38,7 +38,15 @@ class TestChat200ResponseDataCitationsInner(unittest.TestCase):
             return Chat200ResponseDataCitationsInner(
                 document_id = '',
                 source = '',
-                snippet = ''
+                snippet = '',
+                image_id = '',
+                image_place = '',
+                external_id = '',
+                origin_system = '',
+                web_url = '',
+                metadata = {
+                    'key' : null
+                    }
             )
         else:
             return Chat200ResponseDataCitationsInner(
