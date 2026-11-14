@@ -41,7 +41,20 @@ class TestQueryProject200ResponseContextsInner(unittest.TestCase):
                 source = '',
                 title = '',
                 snippet = '',
-                score = 1.337
+                score = 1.337,
+                status = 'COMPLETED',
+                path = [
+                    yggy.models.query_project_200_response_contexts_inner_path_inner.queryProject_200_response_contexts_inner_path_inner(
+                        subject = '', 
+                        predicate = '', 
+                        object = '', )
+                    ],
+                external_id = '',
+                origin_system = '',
+                web_url = '',
+                metadata = {
+                    'key' : null
+                    }
             )
         else:
             return QueryProject200ResponseContextsInner(

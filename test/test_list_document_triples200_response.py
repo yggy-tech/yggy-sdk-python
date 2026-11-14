@@ -50,6 +50,8 @@ class TestListDocumentTriples200Response(unittest.TestCase):
                         subject_id = '', 
                         subject_type = '', 
                         subject_identity_uri = '', 
+                        subject_status = 'ACTIVE', 
+                        object_status = 'ACTIVE', 
                         object_id = '', 
                         object_type = '', 
                         object_identity_uri = '', 
@@ -65,6 +67,7 @@ class TestListDocumentTriples200Response(unittest.TestCase):
                             ''
                             ], 
                         evidence_region_id = '', 
+                        evidence_image_id = '', 
                         note = '', 
                         created_at = '', 
                         status = 'ACTIVE', )
@@ -87,6 +90,8 @@ class TestListDocumentTriples200Response(unittest.TestCase):
                         subject_id = '', 
                         subject_type = '', 
                         subject_identity_uri = '', 
+                        subject_status = 'ACTIVE', 
+                        object_status = 'ACTIVE', 
                         object_id = '', 
                         object_type = '', 
                         object_identity_uri = '', 
@@ -102,6 +107,7 @@ class TestListDocumentTriples200Response(unittest.TestCase):
                             ''
                             ], 
                         evidence_region_id = '', 
+                        evidence_image_id = '', 
                         note = '', 
                         created_at = '', 
                         status = 'ACTIVE', )

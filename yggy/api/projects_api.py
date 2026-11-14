@@ -355,7 +355,7 @@ class ProjectsApi:
     ) -> ListProjects200Response:
         """List organization projects
 
-        List projects in the active organization with pagination, search, and sort. Default sort is recentlyViewed (last-viewed desc, falling back to createdAt desc), so a user with no views yet gets creation-time order. name orders by project name. Search is a case-insensitive substring over project name and slug.
+        List projects in the active organization with pagination, search, and sort. Organization owners and admins and organization API keys see every shared project. Other members see the projects they are a member of, plus public projects, which come back with isMember false and no counts. Private projects they are not a member of are not listed and not counted in total. Default sort is recentlyViewed (last-viewed desc, falling back to createdAt desc), so a user with no views yet gets creation-time order. name orders by project name. Search is a case-insensitive substring over project name and slug.
 
         :param limit: Page size, from 1 to 100.
         :type limit: int
@@ -441,7 +441,7 @@ class ProjectsApi:
     ) -> ApiResponse[ListProjects200Response]:
         """List organization projects
 
-        List projects in the active organization with pagination, search, and sort. Default sort is recentlyViewed (last-viewed desc, falling back to createdAt desc), so a user with no views yet gets creation-time order. name orders by project name. Search is a case-insensitive substring over project name and slug.
+        List projects in the active organization with pagination, search, and sort. Organization owners and admins and organization API keys see every shared project. Other members see the projects they are a member of, plus public projects, which come back with isMember false and no counts. Private projects they are not a member of are not listed and not counted in total. Default sort is recentlyViewed (last-viewed desc, falling back to createdAt desc), so a user with no views yet gets creation-time order. name orders by project name. Search is a case-insensitive substring over project name and slug.
 
         :param limit: Page size, from 1 to 100.
         :type limit: int
@@ -527,7 +527,7 @@ class ProjectsApi:
     ) -> RESTResponseType:
         """List organization projects
 
-        List projects in the active organization with pagination, search, and sort. Default sort is recentlyViewed (last-viewed desc, falling back to createdAt desc), so a user with no views yet gets creation-time order. name orders by project name. Search is a case-insensitive substring over project name and slug.
+        List projects in the active organization with pagination, search, and sort. Organization owners and admins and organization API keys see every shared project. Other members see the projects they are a member of, plus public projects, which come back with isMember false and no counts. Private projects they are not a member of are not listed and not counted in total. Default sort is recentlyViewed (last-viewed desc, falling back to createdAt desc), so a user with no views yet gets creation-time order. name orders by project name. Search is a case-insensitive substring over project name and slug.
 
         :param limit: Page size, from 1 to 100.
         :type limit: int

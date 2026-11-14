@@ -54,6 +54,7 @@ class TestGetDocumentStatus200Response(unittest.TestCase):
                 workflow_error = '',
                 retryable = True,
                 triples_extracted = 1.337,
+                outcome = 'unchanged',
                 input_tokens = 1.337,
                 output_tokens = 1.337,
                 extraction_tier = 'fast',
@@ -70,7 +71,8 @@ class TestGetDocumentStatus200Response(unittest.TestCase):
                         message = '', 
                         current = 1.337, 
                         total = 1.337, 
-                        unit = '', )
+                        unit = '', 
+                        waited_for_capacity = True, )
                     ],
                 stages = [
                     yggy.models.get_document_status_200_response_steps_inner.getDocumentStatus_200_response_steps_inner(
@@ -83,7 +85,8 @@ class TestGetDocumentStatus200Response(unittest.TestCase):
                         message = '', 
                         current = 1.337, 
                         total = 1.337, 
-                        unit = '', )
+                        unit = '', 
+                        waited_for_capacity = True, )
                     ],
                 invocation_id = '',
                 updated_at = 1.337
