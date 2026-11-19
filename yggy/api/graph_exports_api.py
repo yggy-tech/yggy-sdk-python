@@ -99,12 +99,12 @@ class GraphExportsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '202': "ListGraphExports200ResponseExportsInner",
-            '401': "ListProjects400Response",
-            '403': "ListProjects400Response",
-            '404': "ListProjects400Response",
-            '409': "ListProjects400Response",
-            '429': "ListProjects400Response",
-            '503': "ListProjects400Response",
+            '401': "AppErrorResponse",
+            '403': "AppErrorResponse",
+            '404': "AppErrorResponse",
+            '409': "AppErrorResponse",
+            '429': "AppErrorResponse",
+            '503': "AppErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -175,12 +175,12 @@ class GraphExportsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '202': "ListGraphExports200ResponseExportsInner",
-            '401': "ListProjects400Response",
-            '403': "ListProjects400Response",
-            '404': "ListProjects400Response",
-            '409': "ListProjects400Response",
-            '429': "ListProjects400Response",
-            '503': "ListProjects400Response",
+            '401': "AppErrorResponse",
+            '403': "AppErrorResponse",
+            '404': "AppErrorResponse",
+            '409': "AppErrorResponse",
+            '429': "AppErrorResponse",
+            '503': "AppErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -251,12 +251,12 @@ class GraphExportsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '202': "ListGraphExports200ResponseExportsInner",
-            '401': "ListProjects400Response",
-            '403': "ListProjects400Response",
-            '404': "ListProjects400Response",
-            '409': "ListProjects400Response",
-            '429': "ListProjects400Response",
-            '503': "ListProjects400Response",
+            '401': "AppErrorResponse",
+            '403': "AppErrorResponse",
+            '404': "AppErrorResponse",
+            '409': "AppErrorResponse",
+            '429': "AppErrorResponse",
+            '503': "AppErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -404,10 +404,10 @@ class GraphExportsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "str",
-            '401': "ListProjects400Response",
-            '403': "ListProjects400Response",
-            '404': "ListProjects400Response",
-            '409': "ListProjects400Response",
+            '401': "AppErrorResponse",
+            '403': "AppErrorResponse",
+            '404': "AppErrorResponse",
+            '409': "AppErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -478,10 +478,10 @@ class GraphExportsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "str",
-            '401': "ListProjects400Response",
-            '403': "ListProjects400Response",
-            '404': "ListProjects400Response",
-            '409': "ListProjects400Response",
+            '401': "AppErrorResponse",
+            '403': "AppErrorResponse",
+            '404': "AppErrorResponse",
+            '409': "AppErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -552,10 +552,10 @@ class GraphExportsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "str",
-            '401': "ListProjects400Response",
-            '403': "ListProjects400Response",
-            '404': "ListProjects400Response",
-            '409': "ListProjects400Response",
+            '401': "AppErrorResponse",
+            '403': "AppErrorResponse",
+            '404': "AppErrorResponse",
+            '409': "AppErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -687,9 +687,9 @@ class GraphExportsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListGraphExports200Response",
-            '401': "ListProjects400Response",
-            '403': "ListProjects400Response",
-            '404': "ListProjects400Response",
+            '401': "AppErrorResponse",
+            '403': "AppErrorResponse",
+            '404': "AppErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -756,9 +756,9 @@ class GraphExportsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListGraphExports200Response",
-            '401': "ListProjects400Response",
-            '403': "ListProjects400Response",
-            '404': "ListProjects400Response",
+            '401': "AppErrorResponse",
+            '403': "AppErrorResponse",
+            '404': "AppErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -825,9 +825,9 @@ class GraphExportsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListGraphExports200Response",
-            '401': "ListProjects400Response",
-            '403': "ListProjects400Response",
-            '404': "ListProjects400Response",
+            '401': "AppErrorResponse",
+            '403': "AppErrorResponse",
+            '404': "AppErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,

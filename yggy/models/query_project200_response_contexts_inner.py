@@ -18,8 +18,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from yggy.models.query_project200_response_contexts_inner_metadata_value import QueryProject200ResponseContextsInnerMetadataValue
+from yggy.models.query_project200_response_contexts_inner_path_inner import QueryProject200ResponseContextsInnerPathInner
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,13 +29,29 @@ class QueryProject200ResponseContextsInner(BaseModel):
     """
     QueryProject200ResponseContextsInner
     """ # noqa: E501
-    id: StrictStr = Field(description="Stable context id: source slug when present, otherwise the document id")
-    document_id: StrictStr = Field(description="Document id", alias="documentId")
-    source: Optional[StrictStr] = Field(default=None, description="Caller-supplied source id when the document has one")
+    id: StrictStr = Field(description="Stable id of the result: the document's `source` when it has one, otherwise its id")
+    document_id: StrictStr = Field(description="yggy document id", alias="documentId")
+    source: Optional[StrictStr] = Field(default=None, description="The `source` you set on upload, when the document has one")
     title: StrictStr = Field(description="Document title")
-    snippet: StrictStr = Field(description="Short passage used for ranking")
-    score: Union[StrictFloat, StrictInt] = Field(description="Relative rank from 0 to 1 inside this result set")
-    __properties: ClassVar[List[str]] = ["id", "documentId", "source", "title", "snippet", "score"]
+    snippet: StrictStr = Field(description="The passage of the document that best matches the question, up to 400 characters. The title when yggy has no text for the document.")
+    score: Union[StrictFloat, StrictInt] = Field(description="Relevance from 0 to 1, relative to the best document in this response")
+    status: Optional[StrictStr] = Field(default=None, description="Processing state of the document. Always set. `COMPLETED`: analyzed, its facts count in the ranking. `STORED`: saved without analysis, found by its title and text only. `FAILED`: analysis failed, found by its title and text only.")
+    path: Optional[List[QueryProject200ResponseContextsInnerPathInner]] = Field(default=None, description="Present when the document was found only by following relations (`hops`): the relations from what the question found to a fact of this document, in order.")
+    external_id: Optional[StrictStr] = Field(default=None, description="Your own id for the document, as sent on upload", alias="externalId")
+    origin_system: Optional[StrictStr] = Field(default=None, description="Business system the data originates from", alias="originSystem")
+    web_url: Optional[StrictStr] = Field(default=None, description="Link to the document in your system", alias="webUrl")
+    metadata: Optional[Dict[str, QueryProject200ResponseContextsInnerMetadataValue]] = Field(default=None, description="Your own key-value pairs, as sent on upload. Imported documents carry fields of their source here.")
+    __properties: ClassVar[List[str]] = ["id", "documentId", "source", "title", "snippet", "score", "status", "path", "externalId", "originSystem", "webUrl", "metadata"]
+
+    @field_validator('status')
+    def status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['COMPLETED', 'STORED', 'FAILED']):
+            raise ValueError("must be one of enum values ('COMPLETED', 'STORED', 'FAILED')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -74,6 +92,20 @@ class QueryProject200ResponseContextsInner(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in path (list)
+        _items = []
+        if self.path:
+            for _item_path in self.path:
+                if _item_path:
+                    _items.append(_item_path.to_dict())
+            _dict['path'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
+        _field_dict = {}
+        if self.metadata:
+            for _key_metadata in self.metadata:
+                if self.metadata[_key_metadata]:
+                    _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict()
+            _dict['metadata'] = _field_dict
         return _dict
 
     @classmethod
@@ -91,7 +123,18 @@ class QueryProject200ResponseContextsInner(BaseModel):
             "source": obj.get("source"),
             "title": obj.get("title"),
             "snippet": obj.get("snippet"),
-            "score": obj.get("score")
+            "score": obj.get("score"),
+            "status": obj.get("status"),
+            "path": [QueryProject200ResponseContextsInnerPathInner.from_dict(_item) for _item in obj["path"]] if obj.get("path") is not None else None,
+            "externalId": obj.get("externalId"),
+            "originSystem": obj.get("originSystem"),
+            "webUrl": obj.get("webUrl"),
+            "metadata": dict(
+                (_k, QueryProject200ResponseContextsInnerMetadataValue.from_dict(_v))
+                for _k, _v in obj["metadata"].items()
+            )
+            if obj.get("metadata") is not None
+            else None
         })
         return _obj
 

@@ -45,9 +45,15 @@ class TestListDocumentTriples200ResponseTriplesInner(unittest.TestCase):
                     value = '', 
                     identity_uri = '', 
                     approved = True, ),
+                object_identity = yggy.models.list_document_triples_200_response_triples_inner_object_identity.listDocumentTriples_200_response_triples_inner_objectIdentity(
+                    field = '', 
+                    value = '', 
+                    approved = True, ),
                 subject_id = '',
                 subject_type = '',
                 subject_identity_uri = '',
+                subject_status = 'ACTIVE',
+                object_status = 'ACTIVE',
                 object_id = '',
                 object_type = '',
                 object_identity_uri = '',
@@ -63,6 +69,7 @@ class TestListDocumentTriples200ResponseTriplesInner(unittest.TestCase):
                     ''
                     ],
                 evidence_region_id = '',
+                evidence_image_id = '',
                 note = '',
                 created_at = '',
                 status = 'ACTIVE'

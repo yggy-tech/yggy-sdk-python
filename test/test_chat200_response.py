@@ -43,7 +43,15 @@ class TestChat200Response(unittest.TestCase):
                         yggy.models.chat_200_response_data_citations_inner.chat_200_response_data_citations_inner(
                             document_id = '', 
                             source = '', 
-                            snippet = '', )
+                            snippet = '', 
+                            image_id = '', 
+                            image_place = '', 
+                            external_id = '', 
+                            origin_system = '', 
+                            web_url = '', 
+                            metadata = {
+                                'key' : null
+                                }, )
                         ], 
                     tool_calls = [
                         yggy.models.chat_200_response_data_tool_calls_inner.chat_200_response_data_toolCalls_inner(
@@ -57,7 +65,8 @@ class TestChat200Response(unittest.TestCase):
                         total_tokens = 1.337, ), 
                     metadata = yggy.models.chat_200_response_data_metadata.chat_200_response_data_metadata(
                         processing_time_ms = 1.337, 
-                        tier_applied = 'fast', ), )
+                        tier_applied = 'fast', 
+                        tier_reason = '', ), )
             )
         else:
             return Chat200Response(
@@ -68,7 +77,15 @@ class TestChat200Response(unittest.TestCase):
                         yggy.models.chat_200_response_data_citations_inner.chat_200_response_data_citations_inner(
                             document_id = '', 
                             source = '', 
-                            snippet = '', )
+                            snippet = '', 
+                            image_id = '', 
+                            image_place = '', 
+                            external_id = '', 
+                            origin_system = '', 
+                            web_url = '', 
+                            metadata = {
+                                'key' : null
+                                }, )
                         ], 
                     tool_calls = [
                         yggy.models.chat_200_response_data_tool_calls_inner.chat_200_response_data_toolCalls_inner(
@@ -82,7 +99,8 @@ class TestChat200Response(unittest.TestCase):
                         total_tokens = 1.337, ), 
                     metadata = yggy.models.chat_200_response_data_metadata.chat_200_response_data_metadata(
                         processing_time_ms = 1.337, 
-                        tier_applied = 'fast', ), ),
+                        tier_applied = 'fast', 
+                        tier_reason = '', ), ),
         )
         """
 
