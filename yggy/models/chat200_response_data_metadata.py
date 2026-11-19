@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Union
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +29,8 @@ class Chat200ResponseDataMetadata(BaseModel):
     """ # noqa: E501
     processing_time_ms: Union[StrictFloat, StrictInt] = Field(alias="processingTimeMs")
     tier_applied: StrictStr = Field(alias="tierApplied")
-    __properties: ClassVar[List[str]] = ["processingTimeMs", "tierApplied"]
+    tier_reason: Optional[StrictStr] = Field(default=None, description="Why the applied tier differs from the requested one", alias="tierReason")
+    __properties: ClassVar[List[str]] = ["processingTimeMs", "tierApplied", "tierReason"]
 
     @field_validator('tier_applied')
     def tier_applied_validate_enum(cls, value):
@@ -90,7 +91,8 @@ class Chat200ResponseDataMetadata(BaseModel):
 
         _obj = cls.model_validate({
             "processingTimeMs": obj.get("processingTimeMs"),
-            "tierApplied": obj.get("tierApplied")
+            "tierApplied": obj.get("tierApplied"),
+            "tierReason": obj.get("tierReason")
         })
         return _obj
 

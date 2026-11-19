@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **document_id** | **str** |  | 
 **step** | **str** |  | [optional] 
 **progress** | **float** |  | 
+**document_status** | **str** |  | [optional] 
 **message** | **str** |  | [optional] 
 **paused** | **bool** |  | [optional] 
 **completed** | **bool** |  | 
@@ -23,6 +24,7 @@ Name | Type | Description | Notes
 **workflow_error** | **str** |  | [optional] 
 **retryable** | **bool** |  | [optional] 
 **triples_extracted** | **float** |  | [optional] 
+**outcome** | **str** |  | [optional] 
 **input_tokens** | **float** |  | [optional] 
 **output_tokens** | **float** |  | [optional] 
 **extraction_tier** | **str** |  | [optional] 

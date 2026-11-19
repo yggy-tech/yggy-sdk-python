@@ -15,10 +15,10 @@
 
 import unittest
 
-from yggy.models.list_projects400_response import ListProjects400Response
+from yggy.models.app_error_response import AppErrorResponse
 
-class TestListProjects400Response(unittest.TestCase):
-    """ListProjects400Response unit test stubs"""
+class TestAppErrorResponse(unittest.TestCase):
+    """AppErrorResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,34 +26,34 @@ class TestListProjects400Response(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> ListProjects400Response:
-        """Test ListProjects400Response
+    def make_instance(self, include_optional) -> AppErrorResponse:
+        """Test AppErrorResponse
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `ListProjects400Response`
+        # uncomment below to create an instance of `AppErrorResponse`
         """
-        model = ListProjects400Response()
+        model = AppErrorResponse()
         if include_optional:
-            return ListProjects400Response(
+            return AppErrorResponse(
                 success = false,
-                error = yggy.models.list_projects_400_response_error.listProjects_400_response_error(
+                error = yggy.models.app_error_response_error.AppErrorResponse_error(
                     message = '', 
                     code = 'INTERNAL_ERROR', 
                     details = null, )
             )
         else:
-            return ListProjects400Response(
+            return AppErrorResponse(
                 success = false,
-                error = yggy.models.list_projects_400_response_error.listProjects_400_response_error(
+                error = yggy.models.app_error_response_error.AppErrorResponse_error(
                     message = '', 
                     code = 'INTERNAL_ERROR', 
                     details = null, ),
         )
         """
 
-    def testListProjects400Response(self):
-        """Test ListProjects400Response"""
+    def testAppErrorResponse(self):
+        """Test AppErrorResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

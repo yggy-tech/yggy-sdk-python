@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **processing_time_ms** | **float** |  | 
 **tier_applied** | **str** |  | 
+**tier_reason** | **str** | Why the applied tier differs from the requested one | [optional] 
 
 ## Example
 

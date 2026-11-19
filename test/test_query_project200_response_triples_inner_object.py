@@ -15,10 +15,10 @@
 
 import unittest
 
-from yggy.models.list_projects400_response_error import ListProjects400ResponseError
+from yggy.models.query_project200_response_triples_inner_object import QueryProject200ResponseTriplesInnerObject
 
-class TestListProjects400ResponseError(unittest.TestCase):
-    """ListProjects400ResponseError unit test stubs"""
+class TestQueryProject200ResponseTriplesInnerObject(unittest.TestCase):
+    """QueryProject200ResponseTriplesInnerObject unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,29 +26,27 @@ class TestListProjects400ResponseError(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> ListProjects400ResponseError:
-        """Test ListProjects400ResponseError
+    def make_instance(self, include_optional) -> QueryProject200ResponseTriplesInnerObject:
+        """Test QueryProject200ResponseTriplesInnerObject
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `ListProjects400ResponseError`
+        # uncomment below to create an instance of `QueryProject200ResponseTriplesInnerObject`
         """
-        model = ListProjects400ResponseError()
+        model = QueryProject200ResponseTriplesInnerObject()
         if include_optional:
-            return ListProjects400ResponseError(
-                message = '',
-                code = 'INTERNAL_ERROR',
-                details = None
+            return QueryProject200ResponseTriplesInnerObject(
+                uri = '',
+                label = ''
             )
         else:
-            return ListProjects400ResponseError(
-                message = '',
-                code = 'INTERNAL_ERROR',
+            return QueryProject200ResponseTriplesInnerObject(
+                label = '',
         )
         """
 
-    def testListProjects400ResponseError(self):
-        """Test ListProjects400ResponseError"""
+    def testQueryProject200ResponseTriplesInnerObject(self):
+        """Test QueryProject200ResponseTriplesInnerObject"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

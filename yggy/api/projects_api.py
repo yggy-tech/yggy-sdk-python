@@ -97,11 +97,11 @@ class ProjectsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "CreateProject201Response",
-            '400': "ListProjects400Response",
-            '401': "ListProjects400Response",
-            '403': "ListProjects400Response",
-            '409': "ListProjects400Response",
-            '500': "ListProjects400Response",
+            '400': "AppErrorResponse",
+            '401': "AppErrorResponse",
+            '403': "AppErrorResponse",
+            '409': "AppErrorResponse",
+            '500': "AppErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -169,11 +169,11 @@ class ProjectsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "CreateProject201Response",
-            '400': "ListProjects400Response",
-            '401': "ListProjects400Response",
-            '403': "ListProjects400Response",
-            '409': "ListProjects400Response",
-            '500': "ListProjects400Response",
+            '400': "AppErrorResponse",
+            '401': "AppErrorResponse",
+            '403': "AppErrorResponse",
+            '409': "AppErrorResponse",
+            '500': "AppErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -241,11 +241,11 @@ class ProjectsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "CreateProject201Response",
-            '400': "ListProjects400Response",
-            '401': "ListProjects400Response",
-            '403': "ListProjects400Response",
-            '409': "ListProjects400Response",
-            '500': "ListProjects400Response",
+            '400': "AppErrorResponse",
+            '401': "AppErrorResponse",
+            '403': "AppErrorResponse",
+            '409': "AppErrorResponse",
+            '500': "AppErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -355,7 +355,7 @@ class ProjectsApi:
     ) -> ListProjects200Response:
         """List organization projects
 
-        List projects in the active organization with pagination, search, and sort. Default sort is recentlyViewed (last-viewed desc, falling back to createdAt desc), so a user with no views yet gets creation-time order. name orders by project name. Search is a case-insensitive substring over project name and slug.
+        List projects in the active organization with pagination, search, and sort. Organization owners and admins and organization API keys see every shared project. Other members see the projects they are a member of, plus public projects, which come back with isMember false and no counts. Private projects they are not a member of are not listed and not counted in total. Default sort is recentlyViewed (last-viewed desc, falling back to createdAt desc), so a user with no views yet gets creation-time order. name orders by project name. Search is a case-insensitive substring over project name and slug.
 
         :param limit: Page size, from 1 to 100.
         :type limit: int
@@ -403,9 +403,9 @@ class ProjectsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListProjects200Response",
-            '400': "ListProjects400Response",
-            '401': "ListProjects400Response",
-            '500': "ListProjects400Response",
+            '400': "AppErrorResponse",
+            '401': "AppErrorResponse",
+            '500': "AppErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -441,7 +441,7 @@ class ProjectsApi:
     ) -> ApiResponse[ListProjects200Response]:
         """List organization projects
 
-        List projects in the active organization with pagination, search, and sort. Default sort is recentlyViewed (last-viewed desc, falling back to createdAt desc), so a user with no views yet gets creation-time order. name orders by project name. Search is a case-insensitive substring over project name and slug.
+        List projects in the active organization with pagination, search, and sort. Organization owners and admins and organization API keys see every shared project. Other members see the projects they are a member of, plus public projects, which come back with isMember false and no counts. Private projects they are not a member of are not listed and not counted in total. Default sort is recentlyViewed (last-viewed desc, falling back to createdAt desc), so a user with no views yet gets creation-time order. name orders by project name. Search is a case-insensitive substring over project name and slug.
 
         :param limit: Page size, from 1 to 100.
         :type limit: int
@@ -489,9 +489,9 @@ class ProjectsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListProjects200Response",
-            '400': "ListProjects400Response",
-            '401': "ListProjects400Response",
-            '500': "ListProjects400Response",
+            '400': "AppErrorResponse",
+            '401': "AppErrorResponse",
+            '500': "AppErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -527,7 +527,7 @@ class ProjectsApi:
     ) -> RESTResponseType:
         """List organization projects
 
-        List projects in the active organization with pagination, search, and sort. Default sort is recentlyViewed (last-viewed desc, falling back to createdAt desc), so a user with no views yet gets creation-time order. name orders by project name. Search is a case-insensitive substring over project name and slug.
+        List projects in the active organization with pagination, search, and sort. Organization owners and admins and organization API keys see every shared project. Other members see the projects they are a member of, plus public projects, which come back with isMember false and no counts. Private projects they are not a member of are not listed and not counted in total. Default sort is recentlyViewed (last-viewed desc, falling back to createdAt desc), so a user with no views yet gets creation-time order. name orders by project name. Search is a case-insensitive substring over project name and slug.
 
         :param limit: Page size, from 1 to 100.
         :type limit: int
@@ -575,9 +575,9 @@ class ProjectsApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ListProjects200Response",
-            '400': "ListProjects400Response",
-            '401': "ListProjects400Response",
-            '500': "ListProjects400Response",
+            '400': "AppErrorResponse",
+            '401': "AppErrorResponse",
+            '500': "AppErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,

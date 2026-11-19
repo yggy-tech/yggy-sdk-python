@@ -18,22 +18,36 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from yggy.models.query_project200_response_triples_inner_object import QueryProject200ResponseTriplesInnerObject
+from yggy.models.query_project200_response_triples_inner_predicate import QueryProject200ResponseTriplesInnerPredicate
 from yggy.models.query_project200_response_triples_inner_subject import QueryProject200ResponseTriplesInnerSubject
 from typing import Optional, Set
 from typing_extensions import Self
 
 class QueryProject200ResponseTriplesInner(BaseModel):
     """
-    QueryProject200ResponseTriplesInner
+    A fact yggy extracted: subject, relation, object
     """ # noqa: E501
     subject: QueryProject200ResponseTriplesInnerSubject
-    predicate: QueryProject200ResponseTriplesInnerSubject
-    object: QueryProject200ResponseTriplesInnerSubject
-    evidence: Optional[StrictStr] = Field(default=None, description="Stored hit text. Omitted when the graph hit has none.")
-    document_id: Optional[StrictStr] = Field(default=None, alias="documentId")
-    __properties: ClassVar[List[str]] = ["subject", "predicate", "object", "evidence", "documentId"]
+    predicate: QueryProject200ResponseTriplesInnerPredicate
+    object: QueryProject200ResponseTriplesInnerObject
+    evidence: Optional[StrictStr] = Field(default=None, description="Source text for the fact, when yggy stored it")
+    status: Optional[StrictStr] = Field(default=None, description="`pending_review` marks a fact that still waits on an ontology review and is not yet confirmed. Absent means active.")
+    measures: Optional[StrictStr] = Field(default=None, description="For a measured value: what it measures and the conditions it held under, e.g. `time to first token; provider Google`")
+    document_id: Optional[StrictStr] = Field(default=None, description="The returned document the fact was extracted from", alias="documentId")
+    __properties: ClassVar[List[str]] = ["subject", "predicate", "object", "evidence", "status", "measures", "documentId"]
+
+    @field_validator('status')
+    def status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['active', 'pending_review']):
+            raise ValueError("must be one of enum values ('active', 'pending_review')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,9 +110,11 @@ class QueryProject200ResponseTriplesInner(BaseModel):
 
         _obj = cls.model_validate({
             "subject": QueryProject200ResponseTriplesInnerSubject.from_dict(obj["subject"]) if obj.get("subject") is not None else None,
-            "predicate": QueryProject200ResponseTriplesInnerSubject.from_dict(obj["predicate"]) if obj.get("predicate") is not None else None,
-            "object": QueryProject200ResponseTriplesInnerSubject.from_dict(obj["object"]) if obj.get("object") is not None else None,
+            "predicate": QueryProject200ResponseTriplesInnerPredicate.from_dict(obj["predicate"]) if obj.get("predicate") is not None else None,
+            "object": QueryProject200ResponseTriplesInnerObject.from_dict(obj["object"]) if obj.get("object") is not None else None,
             "evidence": obj.get("evidence"),
+            "status": obj.get("status"),
+            "measures": obj.get("measures"),
             "documentId": obj.get("documentId")
         })
         return _obj

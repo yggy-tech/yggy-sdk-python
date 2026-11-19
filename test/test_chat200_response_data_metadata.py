@@ -37,7 +37,8 @@ class TestChat200ResponseDataMetadata(unittest.TestCase):
         if include_optional:
             return Chat200ResponseDataMetadata(
                 processing_time_ms = 1.337,
-                tier_applied = 'fast'
+                tier_applied = 'fast',
+                tier_reason = ''
             )
         else:
             return Chat200ResponseDataMetadata(

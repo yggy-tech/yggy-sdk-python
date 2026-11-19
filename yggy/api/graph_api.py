@@ -97,7 +97,7 @@ class GraphApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EntityRead",
-            '404': "ListProjects400Response",
+            '404': "AppErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -168,7 +168,7 @@ class GraphApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EntityRead",
-            '404': "ListProjects400Response",
+            '404': "AppErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -239,7 +239,7 @@ class GraphApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EntityRead",
-            '404': "ListProjects400Response",
+            '404': "AppErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,

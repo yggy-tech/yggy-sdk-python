@@ -32,6 +32,7 @@ class GetDocumentStatus200Response(BaseModel):
     document_id: StrictStr = Field(alias="documentId")
     step: Optional[StrictStr] = None
     progress: Union[Annotated[float, Field(le=100, strict=True, ge=0)], Annotated[int, Field(le=100, strict=True, ge=0)]]
+    document_status: Optional[StrictStr] = Field(default=None, alias="documentStatus")
     message: Optional[StrictStr] = None
     paused: Optional[StrictBool] = None
     completed: StrictBool
@@ -47,6 +48,7 @@ class GetDocumentStatus200Response(BaseModel):
     workflow_error: Optional[StrictStr] = Field(default=None, alias="workflowError")
     retryable: Optional[StrictBool] = None
     triples_extracted: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="triplesExtracted")
+    outcome: Optional[StrictStr] = None
     input_tokens: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="inputTokens")
     output_tokens: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="outputTokens")
     extraction_tier: Optional[StrictStr] = Field(default=None, alias="extractionTier")
@@ -56,7 +58,17 @@ class GetDocumentStatus200Response(BaseModel):
     stages: Optional[List[GetDocumentStatus200ResponseStepsInner]] = None
     invocation_id: Optional[StrictStr] = Field(default=None, alias="invocationId")
     updated_at: Union[StrictFloat, StrictInt] = Field(alias="updatedAt")
-    __properties: ClassVar[List[str]] = ["documentId", "step", "progress", "message", "paused", "completed", "failed", "stored", "awaitingOntologyReview", "ontologyReviewId", "ontologyProposalCount", "error", "code", "failureMessage", "status", "workflowError", "retryable", "triplesExtracted", "inputTokens", "outputTokens", "extractionTier", "extractionMode", "estimatedRemainingMs", "steps", "stages", "invocationId", "updatedAt"]
+    __properties: ClassVar[List[str]] = ["documentId", "step", "progress", "documentStatus", "message", "paused", "completed", "failed", "stored", "awaitingOntologyReview", "ontologyReviewId", "ontologyProposalCount", "error", "code", "failureMessage", "status", "workflowError", "retryable", "triplesExtracted", "outcome", "inputTokens", "outputTokens", "extractionTier", "extractionMode", "estimatedRemainingMs", "steps", "stages", "invocationId", "updatedAt"]
+
+    @field_validator('document_status')
+    def document_status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['PENDING', 'PROCESSING', 'COMPLETED', 'FAILED']):
+            raise ValueError("must be one of enum values ('PENDING', 'PROCESSING', 'COMPLETED', 'FAILED')")
+        return value
 
     @field_validator('status')
     def status_validate_enum(cls, value):
@@ -66,6 +78,16 @@ class GetDocumentStatus200Response(BaseModel):
 
         if value not in set(['pending', 'running', 'suspended', 'failed']):
             raise ValueError("must be one of enum values ('pending', 'running', 'suspended', 'failed')")
+        return value
+
+    @field_validator('outcome')
+    def outcome_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['unchanged']):
+            raise ValueError("must be one of enum values ('unchanged')")
         return value
 
     @field_validator('extraction_tier')
@@ -156,6 +178,7 @@ class GetDocumentStatus200Response(BaseModel):
             "documentId": obj.get("documentId"),
             "step": obj.get("step"),
             "progress": obj.get("progress"),
+            "documentStatus": obj.get("documentStatus"),
             "message": obj.get("message"),
             "paused": obj.get("paused"),
             "completed": obj.get("completed"),
@@ -171,6 +194,7 @@ class GetDocumentStatus200Response(BaseModel):
             "workflowError": obj.get("workflowError"),
             "retryable": obj.get("retryable"),
             "triplesExtracted": obj.get("triplesExtracted"),
+            "outcome": obj.get("outcome"),
             "inputTokens": obj.get("inputTokens"),
             "outputTokens": obj.get("outputTokens"),
             "extractionTier": obj.get("extractionTier"),

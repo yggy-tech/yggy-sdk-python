@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from yggy.models.list_documents200_response_documents_inner_attached_to import ListDocuments200ResponseDocumentsInnerAttachedTo
 from yggy.models.list_documents200_response_documents_inner_mail_attachments_inner import ListDocuments200ResponseDocumentsInnerMailAttachmentsInner
+from yggy.models.list_documents200_response_documents_inner_storage_location import ListDocuments200ResponseDocumentsInnerStorageLocation
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -37,6 +38,7 @@ class ListDocuments200ResponseDocumentsInner(BaseModel):
     source: Optional[StrictStr] = None
     source_kind: Optional[StrictStr] = Field(default=None, alias="sourceKind")
     origin_system: Optional[StrictStr] = Field(default=None, alias="originSystem")
+    source_external_id: Optional[StrictStr] = Field(default=None, alias="sourceExternalId")
     owner_external_id: Optional[StrictStr] = Field(default=None, alias="ownerExternalId")
     owner_display_name: Optional[StrictStr] = Field(default=None, alias="ownerDisplayName")
     content_type: StrictStr = Field(alias="contentType")
@@ -47,6 +49,7 @@ class ListDocuments200ResponseDocumentsInner(BaseModel):
     error: Optional[StrictStr] = None
     code: Optional[StrictStr] = None
     failure_message: Optional[StrictStr] = Field(default=None, alias="failureMessage")
+    failed_stage: Optional[StrictStr] = Field(default=None, alias="failedStage")
     storage_url: Optional[StrictStr] = Field(default=None, alias="storageUrl")
     deleted_at: Optional[StrictStr] = Field(default=None, alias="deletedAt")
     note_kind: Optional[StrictStr] = Field(default=None, alias="noteKind")
@@ -65,9 +68,10 @@ class ListDocuments200ResponseDocumentsInner(BaseModel):
     source_author: Optional[StrictStr] = Field(default=None, alias="sourceAuthor")
     source_metadata: Optional[StrictStr] = Field(default=None, alias="sourceMetadata")
     attached_to: Optional[ListDocuments200ResponseDocumentsInnerAttachedTo] = Field(default=None, alias="attachedTo")
+    storage_location: Optional[ListDocuments200ResponseDocumentsInnerStorageLocation] = Field(default=None, alias="storageLocation")
     mail_attachments: Optional[List[ListDocuments200ResponseDocumentsInnerMailAttachmentsInner]] = Field(default=None, alias="mailAttachments")
     project_external_id: Optional[StrictStr] = Field(default=None, alias="projectExternalId")
-    __properties: ClassVar[List[str]] = ["documentId", "invocationId", "title", "content", "source", "sourceKind", "originSystem", "ownerExternalId", "ownerDisplayName", "contentType", "status", "createdAt", "updatedAt", "tripleCount", "error", "code", "failureMessage", "storageUrl", "deletedAt", "noteKind", "extractionMethod", "structuredRegions", "provenanceChain", "extractionStats", "processingSummary", "modelUsed", "ocrStrategy", "inferenceMode", "extractionGuidanceRevision", "guidanceRecommendations", "sourceCreatedAt", "sourceModifiedAt", "sourceAuthor", "sourceMetadata", "attachedTo", "mailAttachments", "projectExternalId"]
+    __properties: ClassVar[List[str]] = ["documentId", "invocationId", "title", "content", "source", "sourceKind", "originSystem", "sourceExternalId", "ownerExternalId", "ownerDisplayName", "contentType", "status", "createdAt", "updatedAt", "tripleCount", "error", "code", "failureMessage", "failedStage", "storageUrl", "deletedAt", "noteKind", "extractionMethod", "structuredRegions", "provenanceChain", "extractionStats", "processingSummary", "modelUsed", "ocrStrategy", "inferenceMode", "extractionGuidanceRevision", "guidanceRecommendations", "sourceCreatedAt", "sourceModifiedAt", "sourceAuthor", "sourceMetadata", "attachedTo", "storageLocation", "mailAttachments", "projectExternalId"]
 
     @field_validator('source_kind')
     def source_kind_validate_enum(cls, value):
@@ -84,6 +88,16 @@ class ListDocuments200ResponseDocumentsInner(BaseModel):
         """Validates the enum"""
         if value not in set(['PENDING', 'PROCESSING', 'COMPLETED', 'FAILED', 'STORED']):
             raise ValueError("must be one of enum values ('PENDING', 'PROCESSING', 'COMPLETED', 'FAILED', 'STORED')")
+        return value
+
+    @field_validator('failed_stage')
+    def failed_stage_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['parse', 'detection', 'extract', 'resolve', 'insert', 'finalize']):
+            raise ValueError("must be one of enum values ('parse', 'detection', 'extract', 'resolve', 'insert', 'finalize')")
         return value
 
     @field_validator('extraction_method')
@@ -138,6 +152,9 @@ class ListDocuments200ResponseDocumentsInner(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of attached_to
         if self.attached_to:
             _dict['attachedTo'] = self.attached_to.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of storage_location
+        if self.storage_location:
+            _dict['storageLocation'] = self.storage_location.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in mail_attachments (list)
         _items = []
         if self.mail_attachments:
@@ -154,6 +171,11 @@ class ListDocuments200ResponseDocumentsInner(BaseModel):
         # and model_fields_set contains the field
         if self.origin_system is None and "origin_system" in self.model_fields_set:
             _dict['originSystem'] = None
+
+        # set to None if source_external_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.source_external_id is None and "source_external_id" in self.model_fields_set:
+            _dict['sourceExternalId'] = None
 
         # set to None if owner_external_id (nullable) is None
         # and model_fields_set contains the field
@@ -235,6 +257,11 @@ class ListDocuments200ResponseDocumentsInner(BaseModel):
         if self.source_metadata is None and "source_metadata" in self.model_fields_set:
             _dict['sourceMetadata'] = None
 
+        # set to None if storage_location (nullable) is None
+        # and model_fields_set contains the field
+        if self.storage_location is None and "storage_location" in self.model_fields_set:
+            _dict['storageLocation'] = None
+
         # set to None if project_external_id (nullable) is None
         # and model_fields_set contains the field
         if self.project_external_id is None and "project_external_id" in self.model_fields_set:
@@ -259,6 +286,7 @@ class ListDocuments200ResponseDocumentsInner(BaseModel):
             "source": obj.get("source"),
             "sourceKind": obj.get("sourceKind"),
             "originSystem": obj.get("originSystem"),
+            "sourceExternalId": obj.get("sourceExternalId"),
             "ownerExternalId": obj.get("ownerExternalId"),
             "ownerDisplayName": obj.get("ownerDisplayName"),
             "contentType": obj.get("contentType"),
@@ -269,6 +297,7 @@ class ListDocuments200ResponseDocumentsInner(BaseModel):
             "error": obj.get("error"),
             "code": obj.get("code"),
             "failureMessage": obj.get("failureMessage"),
+            "failedStage": obj.get("failedStage"),
             "storageUrl": obj.get("storageUrl"),
             "deletedAt": obj.get("deletedAt"),
             "noteKind": obj.get("noteKind"),
@@ -287,6 +316,7 @@ class ListDocuments200ResponseDocumentsInner(BaseModel):
             "sourceAuthor": obj.get("sourceAuthor"),
             "sourceMetadata": obj.get("sourceMetadata"),
             "attachedTo": ListDocuments200ResponseDocumentsInnerAttachedTo.from_dict(obj["attachedTo"]) if obj.get("attachedTo") is not None else None,
+            "storageLocation": ListDocuments200ResponseDocumentsInnerStorageLocation.from_dict(obj["storageLocation"]) if obj.get("storageLocation") is not None else None,
             "mailAttachments": [ListDocuments200ResponseDocumentsInnerMailAttachmentsInner.from_dict(_item) for _item in obj["mailAttachments"]] if obj.get("mailAttachments") is not None else None,
             "projectExternalId": obj.get("projectExternalId")
         })
