@@ -43,6 +43,7 @@ class TestListProjects200ResponseProjectsInner(unittest.TestCase):
                 organization_id = '',
                 external_id = '',
                 kind = 'shared',
+                visibility = 'private',
                 extraction_purpose = '',
                 extraction_include = [
                     ''
@@ -56,7 +57,8 @@ class TestListProjects200ResponseProjectsInner(unittest.TestCase):
                 updated_at = '',
                 document_count = 0,
                 triple_count = 0,
-                entity_count = 0
+                entity_count = 0,
+                is_member = True
             )
         else:
             return ListProjects200ResponseProjectsInner(
@@ -65,9 +67,11 @@ class TestListProjects200ResponseProjectsInner(unittest.TestCase):
                 name = '',
                 color = '',
                 organization_id = '',
+                visibility = 'private',
                 document_count = 0,
                 triple_count = 0,
                 entity_count = 0,
+                is_member = True,
         )
         """
 

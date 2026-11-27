@@ -20,6 +20,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from yggy.models.how_sure import HowSure
+from yggy.models.list_document_triples200_response_triples_inner_object_identity import ListDocumentTriples200ResponseTriplesInnerObjectIdentity
 from yggy.models.list_document_triples200_response_triples_inner_qualifiers import ListDocumentTriples200ResponseTriplesInnerQualifiers
 from yggy.models.list_document_triples200_response_triples_inner_subject_identity import ListDocumentTriples200ResponseTriplesInnerSubjectIdentity
 from typing import Optional, Set
@@ -34,9 +36,12 @@ class ListDocumentTriples200ResponseTriplesInner(BaseModel):
     predicate: StrictStr
     object: StrictStr
     subject_identity: Optional[ListDocumentTriples200ResponseTriplesInnerSubjectIdentity] = Field(default=None, alias="subjectIdentity")
+    object_identity: Optional[ListDocumentTriples200ResponseTriplesInnerObjectIdentity] = Field(default=None, alias="objectIdentity")
     subject_id: Optional[StrictStr] = Field(default=None, alias="subjectId")
     subject_type: Optional[StrictStr] = Field(default=None, alias="subjectType")
     subject_identity_uri: Optional[StrictStr] = Field(default=None, alias="subjectIdentityUri")
+    subject_status: Optional[StrictStr] = Field(default=None, alias="subjectStatus")
+    object_status: Optional[StrictStr] = Field(default=None, alias="objectStatus")
     object_id: Optional[StrictStr] = Field(default=None, alias="objectId")
     object_type: Optional[StrictStr] = Field(default=None, alias="objectType")
     object_identity_uri: Optional[StrictStr] = Field(default=None, alias="objectIdentityUri")
@@ -45,10 +50,32 @@ class ListDocumentTriples200ResponseTriplesInner(BaseModel):
     extraction_method: Optional[StrictStr] = Field(default=None, alias="extractionMethod")
     evidence: Optional[List[StrictStr]] = None
     evidence_region_id: Optional[StrictStr] = Field(default=None, alias="evidenceRegionId")
+    evidence_image_id: Optional[StrictStr] = Field(default=None, alias="evidenceImageId")
     note: Optional[StrictStr] = None
     created_at: Optional[StrictStr] = None
     status: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["id", "subject", "predicate", "object", "subjectIdentity", "subjectId", "subjectType", "subjectIdentityUri", "objectId", "objectType", "objectIdentityUri", "qualifiers", "source", "extractionMethod", "evidence", "evidenceRegionId", "note", "created_at", "status"]
+    how_sure: HowSure = Field(alias="howSure")
+    __properties: ClassVar[List[str]] = ["id", "subject", "predicate", "object", "subjectIdentity", "objectIdentity", "subjectId", "subjectType", "subjectIdentityUri", "subjectStatus", "objectStatus", "objectId", "objectType", "objectIdentityUri", "qualifiers", "source", "extractionMethod", "evidence", "evidenceRegionId", "evidenceImageId", "note", "created_at", "status", "howSure"]
+
+    @field_validator('subject_status')
+    def subject_status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['ACTIVE', 'SUPERSEDED', 'CONFLICTING', 'RETRACTED', 'PENDING_ONTOLOGY', 'SOURCE_DELETED']):
+            raise ValueError("must be one of enum values ('ACTIVE', 'SUPERSEDED', 'CONFLICTING', 'RETRACTED', 'PENDING_ONTOLOGY', 'SOURCE_DELETED')")
+        return value
+
+    @field_validator('object_status')
+    def object_status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['ACTIVE', 'SUPERSEDED', 'CONFLICTING', 'RETRACTED', 'PENDING_ONTOLOGY', 'SOURCE_DELETED']):
+            raise ValueError("must be one of enum values ('ACTIVE', 'SUPERSEDED', 'CONFLICTING', 'RETRACTED', 'PENDING_ONTOLOGY', 'SOURCE_DELETED')")
+        return value
 
     @field_validator('extraction_method')
     def extraction_method_validate_enum(cls, value):
@@ -112,9 +139,15 @@ class ListDocumentTriples200ResponseTriplesInner(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of subject_identity
         if self.subject_identity:
             _dict['subjectIdentity'] = self.subject_identity.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of object_identity
+        if self.object_identity:
+            _dict['objectIdentity'] = self.object_identity.to_dict()
         # override the default output from pydantic by calling `to_dict()` of qualifiers
         if self.qualifiers:
             _dict['qualifiers'] = self.qualifiers.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of how_sure
+        if self.how_sure:
+            _dict['howSure'] = self.how_sure.to_dict()
         return _dict
 
     @classmethod
@@ -132,9 +165,12 @@ class ListDocumentTriples200ResponseTriplesInner(BaseModel):
             "predicate": obj.get("predicate"),
             "object": obj.get("object"),
             "subjectIdentity": ListDocumentTriples200ResponseTriplesInnerSubjectIdentity.from_dict(obj["subjectIdentity"]) if obj.get("subjectIdentity") is not None else None,
+            "objectIdentity": ListDocumentTriples200ResponseTriplesInnerObjectIdentity.from_dict(obj["objectIdentity"]) if obj.get("objectIdentity") is not None else None,
             "subjectId": obj.get("subjectId"),
             "subjectType": obj.get("subjectType"),
             "subjectIdentityUri": obj.get("subjectIdentityUri"),
+            "subjectStatus": obj.get("subjectStatus"),
+            "objectStatus": obj.get("objectStatus"),
             "objectId": obj.get("objectId"),
             "objectType": obj.get("objectType"),
             "objectIdentityUri": obj.get("objectIdentityUri"),
@@ -143,9 +179,11 @@ class ListDocumentTriples200ResponseTriplesInner(BaseModel):
             "extractionMethod": obj.get("extractionMethod"),
             "evidence": obj.get("evidence"),
             "evidenceRegionId": obj.get("evidenceRegionId"),
+            "evidenceImageId": obj.get("evidenceImageId"),
             "note": obj.get("note"),
             "created_at": obj.get("created_at"),
-            "status": obj.get("status")
+            "status": obj.get("status"),
+            "howSure": HowSure.from_dict(obj["howSure"]) if obj.get("howSure") is not None else None
         })
         return _obj
 

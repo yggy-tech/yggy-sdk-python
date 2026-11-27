@@ -1,15 +1,18 @@
 # QueryProject200ResponseTriplesInner
 
+A fact yggy extracted: subject, relation, object
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **subject** | [**QueryProject200ResponseTriplesInnerSubject**](QueryProject200ResponseTriplesInnerSubject.md) |  | 
-**predicate** | [**QueryProject200ResponseTriplesInnerSubject**](QueryProject200ResponseTriplesInnerSubject.md) |  | 
-**object** | [**QueryProject200ResponseTriplesInnerSubject**](QueryProject200ResponseTriplesInnerSubject.md) |  | 
-**evidence** | **str** | Stored hit text. Omitted when the graph hit has none. | [optional] 
-**document_id** | **str** |  | [optional] 
+**predicate** | [**QueryProject200ResponseTriplesInnerPredicate**](QueryProject200ResponseTriplesInnerPredicate.md) |  | 
+**object** | [**QueryProject200ResponseTriplesInnerObject**](QueryProject200ResponseTriplesInnerObject.md) |  | 
+**evidence** | **str** | Source text for the fact, when yggy stored it | [optional] 
+**status** | **str** | &#x60;pending_review&#x60; marks a fact that still waits on an ontology review and is not yet confirmed. Absent means active. | [optional] 
+**measures** | **str** | For a measured value: what it measures and the conditions it held under, e.g. &#x60;time to first token; provider Google&#x60; | [optional] 
+**document_id** | **str** | The returned document the fact was extracted from | [optional] 
 
 ## Example
 

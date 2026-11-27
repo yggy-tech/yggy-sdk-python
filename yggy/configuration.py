@@ -116,6 +116,7 @@ AuthSettings = TypedDict(
     {
         "bearerAuth": BearerAuthSetting,
         "apiKeyAuth": APIKeyAuthSetting,
+        "writeBackSignature": APIKeyAuthSetting,
     },
     total=False,
 )
@@ -529,6 +530,15 @@ conf = yggy.Configuration(
                     'apiKeyAuth',
                 ),
             }
+        if 'writeBackSignature' in self.api_key:
+            auth['writeBackSignature'] = {
+                'type': 'api_key',
+                'in': 'header',
+                'key': 'yggy-signature',
+                'value': self.get_api_key_with_prefix(
+                    'writeBackSignature',
+                ),
+            }
         return auth
 
     def to_debug_report(self) -> str:
@@ -540,7 +550,7 @@ conf = yggy.Configuration(
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: v1\n"\
-               "SDK Package Version: 0.1.0".\
+               "SDK Package Version: 0.2.0".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self) -> List[HostSetting]:
