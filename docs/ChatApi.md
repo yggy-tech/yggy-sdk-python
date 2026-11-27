@@ -96,6 +96,7 @@ Name | Type | Description  | Notes
 **401** | Unauthorized |  -  |
 **403** | Project access denied |  -  |
 **500** | Internal server error |  -  |
+**504** | The answer took longer than the chat budget; try again |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

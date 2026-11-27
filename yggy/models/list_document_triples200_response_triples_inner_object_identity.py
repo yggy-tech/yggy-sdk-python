@@ -18,26 +18,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, field_validator
-from typing import Any, ClassVar, Dict, List
-from yggy.models.list_projects400_response_error import ListProjects400ResponseError
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ListProjects400Response(BaseModel):
+class ListDocumentTriples200ResponseTriplesInnerObjectIdentity(BaseModel):
     """
-    ListProjects400Response
+    ListDocumentTriples200ResponseTriplesInnerObjectIdentity
     """ # noqa: E501
-    success: StrictBool
-    error: ListProjects400ResponseError
-    __properties: ClassVar[List[str]] = ["success", "error"]
-
-    @field_validator('success')
-    def success_validate_enum(cls, value):
-        """Validates the enum"""
-        if value not in set(['false']):
-            raise ValueError("must be one of enum values ('false')")
-        return value
+    var_field: StrictStr = Field(alias="field")
+    value: StrictStr
+    approved: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["field", "value", "approved"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -57,7 +50,7 @@ class ListProjects400Response(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ListProjects400Response from a JSON string"""
+        """Create an instance of ListDocumentTriples200ResponseTriplesInnerObjectIdentity from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -78,14 +71,11 @@ class ListProjects400Response(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of error
-        if self.error:
-            _dict['error'] = self.error.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ListProjects400Response from a dict"""
+        """Create an instance of ListDocumentTriples200ResponseTriplesInnerObjectIdentity from a dict"""
         if obj is None:
             return None
 
@@ -93,8 +83,9 @@ class ListProjects400Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "success": obj.get("success"),
-            "error": ListProjects400ResponseError.from_dict(obj["error"]) if obj.get("error") is not None else None
+            "field": obj.get("field"),
+            "value": obj.get("value"),
+            "approved": obj.get("approved")
         })
         return _obj
 
